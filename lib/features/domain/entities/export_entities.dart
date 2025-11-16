@@ -1,0 +1,10 @@
+export '../entities/asistencia/asistencia.dart';
+export '../entities/ruta/ruta.dart';
+export '../entities/usuario/usuario.dart';
+export '../entities/role/role.dart';
+export '../entities/cliente/cliente.dart';
+export '../entities/marcar_llegada_visita/marcar_llegada_visita.dart';
+export '../entities/visita/visita.dart';
+export '../entities/seguimiento_vendedor/seguimiento_vendedor.dart';
+export '../entities/zona/zona.dart';
+export '../entities/evidencia/evidencia.dart';
