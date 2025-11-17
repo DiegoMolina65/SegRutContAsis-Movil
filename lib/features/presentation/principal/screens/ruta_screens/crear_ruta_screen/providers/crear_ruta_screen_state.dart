@@ -11,6 +11,9 @@ abstract class CrearRutaScreenState with _$CrearRutaScreenState {
     MensajeUI? mensajeUi,
     MensajeUI? eventoUI,
 
+    /// Campo para Edición (si > 0, estamos en modo edición)
+    @Default(0) int rutId,
+
     /// Campos del formulario
     @Default(0) int venId,
     @Default(0) int supId,
@@ -21,3 +24,5 @@ abstract class CrearRutaScreenState with _$CrearRutaScreenState {
     @Default(false) bool isCargando,
   }) = _CrearRutaScreenState;
 }
+
+

@@ -11,9 +11,10 @@ class DialogoMensajeUIContenido extends StatelessWidget {
   Widget build(BuildContext context) {
     final descripcion = mensajeUI.mensaje.replaceFirst('Exception:', '');
     final stackTrace = mensajeUI.when(
-      errorMensaje: (mensaje, titulo, stackTrace) => "$stackTrace",
-      alertaMensaje: (mensaje, titulo) => null,
-      okMensaje: (mensaje, titulo) => null,
+      errorMensaje: (mensaje, titulo, stackTrace, datosExtras) => "$stackTrace",
+      alertaMensaje: (mensaje, titulo, datosExtras) => null,
+      okMensaje: (mensaje, titulo, datosExtras) => null,
+      infoMensaje: (mensaje, titulo, datosExtras) => null,
     );
     return SingleChildScrollView(
       child: Column(

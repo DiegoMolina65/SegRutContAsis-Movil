@@ -11,6 +11,9 @@ abstract class CrearVisitaScreenState with _$CrearVisitaScreenState {
     MensajeUI? mensajeUi,
     MensajeUI? eventoUI,
 
+    /// Campo para Edición (si > 0, estamos en modo edición)
+    @Default(0) int visId,
+
     /// Campos del formulario
     @Default(0) int rutId,
     @Default(0) int dirClId,

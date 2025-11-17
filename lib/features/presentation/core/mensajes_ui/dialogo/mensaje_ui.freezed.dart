@@ -14,7 +14,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MensajeUI {
 
- String get mensaje; String? get titulo;
+ String get mensaje; String? get titulo; Object? get datosExtras;
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -27,7 +27,7 @@ $MensajeUICopyWith<MensajeUI> get copyWith => _$MensajeUICopyWithImpl<MensajeUI>
 
 @override
 String toString() {
-  return 'MensajeUI(mensaje: $mensaje, titulo: $titulo)';
+  return 'MensajeUI(mensaje: $mensaje, titulo: $titulo, datosExtras: $datosExtras)';
 }
 
 
@@ -38,7 +38,7 @@ abstract mixin class $MensajeUICopyWith<$Res>  {
   factory $MensajeUICopyWith(MensajeUI value, $Res Function(MensajeUI) _then) = _$MensajeUICopyWithImpl;
 @useResult
 $Res call({
- String mensaje, String? titulo
+ String mensaje, String? titulo, Object? datosExtras
 });
 
 
@@ -55,11 +55,11 @@ class _$MensajeUICopyWithImpl<$Res>
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? mensaje = null,Object? titulo = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? mensaje = null,Object? titulo = freezed,Object? datosExtras = freezed,}) {
   return _then(_self.copyWith(
 mensaje: null == mensaje ? _self.mensaje : mensaje // ignore: cast_nullable_to_non_nullable
 as String,titulo: freezed == titulo ? _self.titulo : titulo // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,datosExtras: freezed == datosExtras ? _self.datosExtras : datosExtras ,
   ));
 }
 
@@ -80,13 +80,14 @@ extension MensajeUIPatterns on MensajeUI {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ErrorMensajeUI value)?  errorMensaje,TResult Function( AlertaMensajeUI value)?  alertaMensaje,TResult Function( OkMensajeUI value)?  okMensaje,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( ErrorMensajeUI value)?  errorMensaje,TResult Function( AlertaMensajeUI value)?  alertaMensaje,TResult Function( OkMensajeUI value)?  okMensaje,TResult Function( InfoMensajeUI value)?  infoMensaje,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case ErrorMensajeUI() when errorMensaje != null:
 return errorMensaje(_that);case AlertaMensajeUI() when alertaMensaje != null:
 return alertaMensaje(_that);case OkMensajeUI() when okMensaje != null:
-return okMensaje(_that);case _:
+return okMensaje(_that);case InfoMensajeUI() when infoMensaje != null:
+return infoMensaje(_that);case _:
   return orElse();
 
 }
@@ -104,13 +105,14 @@ return okMensaje(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ErrorMensajeUI value)  errorMensaje,required TResult Function( AlertaMensajeUI value)  alertaMensaje,required TResult Function( OkMensajeUI value)  okMensaje,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( ErrorMensajeUI value)  errorMensaje,required TResult Function( AlertaMensajeUI value)  alertaMensaje,required TResult Function( OkMensajeUI value)  okMensaje,required TResult Function( InfoMensajeUI value)  infoMensaje,}){
 final _that = this;
 switch (_that) {
 case ErrorMensajeUI():
 return errorMensaje(_that);case AlertaMensajeUI():
 return alertaMensaje(_that);case OkMensajeUI():
-return okMensaje(_that);case _:
+return okMensaje(_that);case InfoMensajeUI():
+return infoMensaje(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -127,13 +129,14 @@ return okMensaje(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ErrorMensajeUI value)?  errorMensaje,TResult? Function( AlertaMensajeUI value)?  alertaMensaje,TResult? Function( OkMensajeUI value)?  okMensaje,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( ErrorMensajeUI value)?  errorMensaje,TResult? Function( AlertaMensajeUI value)?  alertaMensaje,TResult? Function( OkMensajeUI value)?  okMensaje,TResult? Function( InfoMensajeUI value)?  infoMensaje,}){
 final _that = this;
 switch (_that) {
 case ErrorMensajeUI() when errorMensaje != null:
 return errorMensaje(_that);case AlertaMensajeUI() when alertaMensaje != null:
 return alertaMensaje(_that);case OkMensajeUI() when okMensaje != null:
-return okMensaje(_that);case _:
+return okMensaje(_that);case InfoMensajeUI() when infoMensaje != null:
+return infoMensaje(_that);case _:
   return null;
 
 }
@@ -150,12 +153,13 @@ return okMensaje(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String mensaje,  String? titulo,  StackTrace? stackTrace)?  errorMensaje,TResult Function( String mensaje,  String? titulo)?  alertaMensaje,TResult Function( String mensaje,  String? titulo)?  okMensaje,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String mensaje,  String? titulo,  StackTrace? stackTrace,  Object? datosExtras)?  errorMensaje,TResult Function( String mensaje,  String? titulo,  Object? datosExtras)?  alertaMensaje,TResult Function( String mensaje,  String? titulo,  Object? datosExtras)?  okMensaje,TResult Function( String mensaje,  String? titulo,  Object? datosExtras)?  infoMensaje,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case ErrorMensajeUI() when errorMensaje != null:
-return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace);case AlertaMensajeUI() when alertaMensaje != null:
-return alertaMensaje(_that.mensaje,_that.titulo);case OkMensajeUI() when okMensaje != null:
-return okMensaje(_that.mensaje,_that.titulo);case _:
+return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace,_that.datosExtras);case AlertaMensajeUI() when alertaMensaje != null:
+return alertaMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case OkMensajeUI() when okMensaje != null:
+return okMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case InfoMensajeUI() when infoMensaje != null:
+return infoMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case _:
   return orElse();
 
 }
@@ -173,12 +177,13 @@ return okMensaje(_that.mensaje,_that.titulo);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String mensaje,  String? titulo,  StackTrace? stackTrace)  errorMensaje,required TResult Function( String mensaje,  String? titulo)  alertaMensaje,required TResult Function( String mensaje,  String? titulo)  okMensaje,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String mensaje,  String? titulo,  StackTrace? stackTrace,  Object? datosExtras)  errorMensaje,required TResult Function( String mensaje,  String? titulo,  Object? datosExtras)  alertaMensaje,required TResult Function( String mensaje,  String? titulo,  Object? datosExtras)  okMensaje,required TResult Function( String mensaje,  String? titulo,  Object? datosExtras)  infoMensaje,}) {final _that = this;
 switch (_that) {
 case ErrorMensajeUI():
-return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace);case AlertaMensajeUI():
-return alertaMensaje(_that.mensaje,_that.titulo);case OkMensajeUI():
-return okMensaje(_that.mensaje,_that.titulo);case _:
+return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace,_that.datosExtras);case AlertaMensajeUI():
+return alertaMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case OkMensajeUI():
+return okMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case InfoMensajeUI():
+return infoMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,12 +200,13 @@ return okMensaje(_that.mensaje,_that.titulo);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String mensaje,  String? titulo,  StackTrace? stackTrace)?  errorMensaje,TResult? Function( String mensaje,  String? titulo)?  alertaMensaje,TResult? Function( String mensaje,  String? titulo)?  okMensaje,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String mensaje,  String? titulo,  StackTrace? stackTrace,  Object? datosExtras)?  errorMensaje,TResult? Function( String mensaje,  String? titulo,  Object? datosExtras)?  alertaMensaje,TResult? Function( String mensaje,  String? titulo,  Object? datosExtras)?  okMensaje,TResult? Function( String mensaje,  String? titulo,  Object? datosExtras)?  infoMensaje,}) {final _that = this;
 switch (_that) {
 case ErrorMensajeUI() when errorMensaje != null:
-return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace);case AlertaMensajeUI() when alertaMensaje != null:
-return alertaMensaje(_that.mensaje,_that.titulo);case OkMensajeUI() when okMensaje != null:
-return okMensaje(_that.mensaje,_that.titulo);case _:
+return errorMensaje(_that.mensaje,_that.titulo,_that.stackTrace,_that.datosExtras);case AlertaMensajeUI() when alertaMensaje != null:
+return alertaMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case OkMensajeUI() when okMensaje != null:
+return okMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case InfoMensajeUI() when infoMensaje != null:
+return infoMensaje(_that.mensaje,_that.titulo,_that.datosExtras);case _:
   return null;
 
 }
@@ -212,12 +218,13 @@ return okMensaje(_that.mensaje,_that.titulo);case _:
 
 
 class ErrorMensajeUI extends MensajeUI {
-   ErrorMensajeUI(this.mensaje, {this.titulo, this.stackTrace}): super._();
+   ErrorMensajeUI(this.mensaje, {this.titulo, this.stackTrace, this.datosExtras}): super._();
   
 
 @override final  String mensaje;
 @override final  String? titulo;
  final  StackTrace? stackTrace;
+@override final  Object? datosExtras;
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
@@ -231,7 +238,7 @@ $ErrorMensajeUICopyWith<ErrorMensajeUI> get copyWith => _$ErrorMensajeUICopyWith
 
 @override
 String toString() {
-  return 'MensajeUI.errorMensaje(mensaje: $mensaje, titulo: $titulo, stackTrace: $stackTrace)';
+  return 'MensajeUI.errorMensaje(mensaje: $mensaje, titulo: $titulo, stackTrace: $stackTrace, datosExtras: $datosExtras)';
 }
 
 
@@ -242,7 +249,7 @@ abstract mixin class $ErrorMensajeUICopyWith<$Res> implements $MensajeUICopyWith
   factory $ErrorMensajeUICopyWith(ErrorMensajeUI value, $Res Function(ErrorMensajeUI) _then) = _$ErrorMensajeUICopyWithImpl;
 @override @useResult
 $Res call({
- String mensaje, String? titulo, StackTrace? stackTrace
+ String mensaje, String? titulo, StackTrace? stackTrace, Object? datosExtras
 });
 
 
@@ -259,12 +266,12 @@ class _$ErrorMensajeUICopyWithImpl<$Res>
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,Object? stackTrace = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,Object? stackTrace = freezed,Object? datosExtras = freezed,}) {
   return _then(ErrorMensajeUI(
 null == mensaje ? _self.mensaje : mensaje // ignore: cast_nullable_to_non_nullable
 as String,titulo: freezed == titulo ? _self.titulo : titulo // ignore: cast_nullable_to_non_nullable
 as String?,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
-as StackTrace?,
+as StackTrace?,datosExtras: freezed == datosExtras ? _self.datosExtras : datosExtras ,
   ));
 }
 
@@ -275,11 +282,12 @@ as StackTrace?,
 
 
 class AlertaMensajeUI extends MensajeUI {
-   AlertaMensajeUI(this.mensaje, {this.titulo}): super._();
+   AlertaMensajeUI(this.mensaje, {this.titulo, this.datosExtras}): super._();
   
 
 @override final  String mensaje;
 @override final  String? titulo;
+@override final  Object? datosExtras;
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
@@ -293,7 +301,7 @@ $AlertaMensajeUICopyWith<AlertaMensajeUI> get copyWith => _$AlertaMensajeUICopyW
 
 @override
 String toString() {
-  return 'MensajeUI.alertaMensaje(mensaje: $mensaje, titulo: $titulo)';
+  return 'MensajeUI.alertaMensaje(mensaje: $mensaje, titulo: $titulo, datosExtras: $datosExtras)';
 }
 
 
@@ -304,7 +312,7 @@ abstract mixin class $AlertaMensajeUICopyWith<$Res> implements $MensajeUICopyWit
   factory $AlertaMensajeUICopyWith(AlertaMensajeUI value, $Res Function(AlertaMensajeUI) _then) = _$AlertaMensajeUICopyWithImpl;
 @override @useResult
 $Res call({
- String mensaje, String? titulo
+ String mensaje, String? titulo, Object? datosExtras
 });
 
 
@@ -321,11 +329,11 @@ class _$AlertaMensajeUICopyWithImpl<$Res>
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,Object? datosExtras = freezed,}) {
   return _then(AlertaMensajeUI(
 null == mensaje ? _self.mensaje : mensaje // ignore: cast_nullable_to_non_nullable
 as String,titulo: freezed == titulo ? _self.titulo : titulo // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,datosExtras: freezed == datosExtras ? _self.datosExtras : datosExtras ,
   ));
 }
 
@@ -336,11 +344,12 @@ as String?,
 
 
 class OkMensajeUI extends MensajeUI {
-   OkMensajeUI(this.mensaje, {this.titulo}): super._();
+   OkMensajeUI(this.mensaje, {this.titulo, this.datosExtras}): super._();
   
 
 @override final  String mensaje;
 @override final  String? titulo;
+@override final  Object? datosExtras;
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
@@ -354,7 +363,7 @@ $OkMensajeUICopyWith<OkMensajeUI> get copyWith => _$OkMensajeUICopyWithImpl<OkMe
 
 @override
 String toString() {
-  return 'MensajeUI.okMensaje(mensaje: $mensaje, titulo: $titulo)';
+  return 'MensajeUI.okMensaje(mensaje: $mensaje, titulo: $titulo, datosExtras: $datosExtras)';
 }
 
 
@@ -365,7 +374,7 @@ abstract mixin class $OkMensajeUICopyWith<$Res> implements $MensajeUICopyWith<$R
   factory $OkMensajeUICopyWith(OkMensajeUI value, $Res Function(OkMensajeUI) _then) = _$OkMensajeUICopyWithImpl;
 @override @useResult
 $Res call({
- String mensaje, String? titulo
+ String mensaje, String? titulo, Object? datosExtras
 });
 
 
@@ -382,11 +391,73 @@ class _$OkMensajeUICopyWithImpl<$Res>
 
 /// Create a copy of MensajeUI
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,Object? datosExtras = freezed,}) {
   return _then(OkMensajeUI(
 null == mensaje ? _self.mensaje : mensaje // ignore: cast_nullable_to_non_nullable
 as String,titulo: freezed == titulo ? _self.titulo : titulo // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,datosExtras: freezed == datosExtras ? _self.datosExtras : datosExtras ,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class InfoMensajeUI extends MensajeUI {
+   InfoMensajeUI(this.mensaje, {this.titulo, this.datosExtras}): super._();
+  
+
+@override final  String mensaje;
+@override final  String? titulo;
+@override final  Object? datosExtras;
+
+/// Create a copy of MensajeUI
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$InfoMensajeUICopyWith<InfoMensajeUI> get copyWith => _$InfoMensajeUICopyWithImpl<InfoMensajeUI>(this, _$identity);
+
+
+
+
+
+@override
+String toString() {
+  return 'MensajeUI.infoMensaje(mensaje: $mensaje, titulo: $titulo, datosExtras: $datosExtras)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $InfoMensajeUICopyWith<$Res> implements $MensajeUICopyWith<$Res> {
+  factory $InfoMensajeUICopyWith(InfoMensajeUI value, $Res Function(InfoMensajeUI) _then) = _$InfoMensajeUICopyWithImpl;
+@override @useResult
+$Res call({
+ String mensaje, String? titulo, Object? datosExtras
+});
+
+
+
+
+}
+/// @nodoc
+class _$InfoMensajeUICopyWithImpl<$Res>
+    implements $InfoMensajeUICopyWith<$Res> {
+  _$InfoMensajeUICopyWithImpl(this._self, this._then);
+
+  final InfoMensajeUI _self;
+  final $Res Function(InfoMensajeUI) _then;
+
+/// Create a copy of MensajeUI
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? mensaje = null,Object? titulo = freezed,Object? datosExtras = freezed,}) {
+  return _then(InfoMensajeUI(
+null == mensaje ? _self.mensaje : mensaje // ignore: cast_nullable_to_non_nullable
+as String,titulo: freezed == titulo ? _self.titulo : titulo // ignore: cast_nullable_to_non_nullable
+as String?,datosExtras: freezed == datosExtras ? _self.datosExtras : datosExtras ,
   ));
 }
 

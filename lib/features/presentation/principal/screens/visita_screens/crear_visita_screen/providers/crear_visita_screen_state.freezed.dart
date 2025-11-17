@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CrearVisitaScreenState {
 
- MensajeUI? get mensajeUi; MensajeUI? get eventoUI;/// Campos del formulario
+ MensajeUI? get mensajeUi; MensajeUI? get eventoUI;/// Campo para Edición (si > 0, estamos en modo edición)
+ int get visId;/// Campos del formulario
  int get rutId; int get dirClId; String get visComentario; bool get isCargando;
 /// Create a copy of CrearVisitaScreenState
 /// with the given fields replaced by the non-null parameter values.
@@ -26,16 +27,16 @@ $CrearVisitaScreenStateCopyWith<CrearVisitaScreenState> get copyWith => _$CrearV
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearVisitaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.visComentario, visComentario) || other.visComentario == visComentario)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearVisitaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visId, visId) || other.visId == visId)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.visComentario, visComentario) || other.visComentario == visComentario)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,rutId,dirClId,visComentario,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visId,rutId,dirClId,visComentario,isCargando);
 
 @override
 String toString() {
-  return 'CrearVisitaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, rutId: $rutId, dirClId: $dirClId, visComentario: $visComentario, isCargando: $isCargando)';
+  return 'CrearVisitaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visId: $visId, rutId: $rutId, dirClId: $dirClId, visComentario: $visComentario, isCargando: $isCargando)';
 }
 
 
@@ -46,7 +47,7 @@ abstract mixin class $CrearVisitaScreenStateCopyWith<$Res>  {
   factory $CrearVisitaScreenStateCopyWith(CrearVisitaScreenState value, $Res Function(CrearVisitaScreenState) _then) = _$CrearVisitaScreenStateCopyWithImpl;
 @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int rutId, int dirClId, String visComentario, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int visId, int rutId, int dirClId, String visComentario, bool isCargando
 });
 
 
@@ -63,11 +64,12 @@ class _$CrearVisitaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearVisitaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? rutId = null,Object? dirClId = null,Object? visComentario = null,Object? isCargando = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visId = null,Object? rutId = null,Object? dirClId = null,Object? visComentario = null,Object? isCargando = null,}) {
   return _then(_self.copyWith(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
-as MensajeUI?,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
+as MensajeUI?,visId: null == visId ? _self.visId : visId // ignore: cast_nullable_to_non_nullable
+as int,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
 as int,dirClId: null == dirClId ? _self.dirClId : dirClId // ignore: cast_nullable_to_non_nullable
 as int,visComentario: null == visComentario ? _self.visComentario : visComentario // ignore: cast_nullable_to_non_nullable
 as String,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable
@@ -180,10 +182,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int dirClId,  String visComentario,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visId,  int rutId,  int dirClId,  String visComentario,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CrearVisitaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visId,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
   return orElse();
 
 }
@@ -201,10 +203,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.v
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int dirClId,  String visComentario,  bool isCargando)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visId,  int rutId,  int dirClId,  String visComentario,  bool isCargando)  $default,) {final _that = this;
 switch (_that) {
 case _CrearVisitaScreenState():
-return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visId,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -221,10 +223,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.v
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int dirClId,  String visComentario,  bool isCargando)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visId,  int rutId,  int dirClId,  String visComentario,  bool isCargando)?  $default,) {final _that = this;
 switch (_that) {
 case _CrearVisitaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visId,_that.rutId,_that.dirClId,_that.visComentario,_that.isCargando);case _:
   return null;
 
 }
@@ -236,11 +238,13 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.dirClId,_that.v
 
 
 class _CrearVisitaScreenState extends CrearVisitaScreenState {
-  const _CrearVisitaScreenState({this.mensajeUi, this.eventoUI, this.rutId = 0, this.dirClId = 0, this.visComentario = "", this.isCargando = false}): super._();
+  const _CrearVisitaScreenState({this.mensajeUi, this.eventoUI, this.visId = 0, this.rutId = 0, this.dirClId = 0, this.visComentario = "", this.isCargando = false}): super._();
   
 
 @override final  MensajeUI? mensajeUi;
 @override final  MensajeUI? eventoUI;
+/// Campo para Edición (si > 0, estamos en modo edición)
+@override@JsonKey() final  int visId;
 /// Campos del formulario
 @override@JsonKey() final  int rutId;
 @override@JsonKey() final  int dirClId;
@@ -257,16 +261,16 @@ _$CrearVisitaScreenStateCopyWith<_CrearVisitaScreenState> get copyWith => __$Cre
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearVisitaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.visComentario, visComentario) || other.visComentario == visComentario)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearVisitaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visId, visId) || other.visId == visId)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.visComentario, visComentario) || other.visComentario == visComentario)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,rutId,dirClId,visComentario,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visId,rutId,dirClId,visComentario,isCargando);
 
 @override
 String toString() {
-  return 'CrearVisitaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, rutId: $rutId, dirClId: $dirClId, visComentario: $visComentario, isCargando: $isCargando)';
+  return 'CrearVisitaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visId: $visId, rutId: $rutId, dirClId: $dirClId, visComentario: $visComentario, isCargando: $isCargando)';
 }
 
 
@@ -277,7 +281,7 @@ abstract mixin class _$CrearVisitaScreenStateCopyWith<$Res> implements $CrearVis
   factory _$CrearVisitaScreenStateCopyWith(_CrearVisitaScreenState value, $Res Function(_CrearVisitaScreenState) _then) = __$CrearVisitaScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int rutId, int dirClId, String visComentario, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int visId, int rutId, int dirClId, String visComentario, bool isCargando
 });
 
 
@@ -294,11 +298,12 @@ class __$CrearVisitaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearVisitaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? rutId = null,Object? dirClId = null,Object? visComentario = null,Object? isCargando = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visId = null,Object? rutId = null,Object? dirClId = null,Object? visComentario = null,Object? isCargando = null,}) {
   return _then(_CrearVisitaScreenState(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
-as MensajeUI?,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
+as MensajeUI?,visId: null == visId ? _self.visId : visId // ignore: cast_nullable_to_non_nullable
+as int,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
 as int,dirClId: null == dirClId ? _self.dirClId : dirClId // ignore: cast_nullable_to_non_nullable
 as int,visComentario: null == visComentario ? _self.visComentario : visComentario // ignore: cast_nullable_to_non_nullable
 as String,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable

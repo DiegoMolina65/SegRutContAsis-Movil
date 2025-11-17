@@ -10,8 +10,22 @@ abstract class MensajeUI extends EventoUI with _$MensajeUI {
     final String mensaje, {
     final String? titulo,
     final StackTrace? stackTrace,
+    Object? datosExtras,
   }) = ErrorMensajeUI;
-  factory MensajeUI.alertaMensaje(String mensaje, {String? titulo}) =
-      AlertaMensajeUI;
-  factory MensajeUI.okMensaje(String mensaje, {String? titulo}) = OkMensajeUI;
+  factory MensajeUI.alertaMensaje(
+    String mensaje, {
+    String? titulo,
+    Object? datosExtras,
+  }) = AlertaMensajeUI;
+  factory MensajeUI.okMensaje(
+    String mensaje, {
+    String? titulo,
+    Object? datosExtras,
+  }) = OkMensajeUI;
+
+  factory MensajeUI.infoMensaje(
+    String mensaje, {
+    String? titulo,
+    Object? datosExtras,
+  }) = InfoMensajeUI;
 }

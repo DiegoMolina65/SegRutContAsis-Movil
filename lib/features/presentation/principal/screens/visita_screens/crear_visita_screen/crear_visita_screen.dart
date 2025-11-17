@@ -13,19 +13,26 @@ import 'package:med_geo_asistencia/shared/provider/obtener_ruta_provider.dart';
 class CrearVisitaScreen extends StatelessWidget {
   static const nombreRuta = '/crear-visita-screen';
 
-  const CrearVisitaScreen({super.key});
+  final int? visId;
+
+  const CrearVisitaScreen({super.key, this.visId});
 
   @override
   Widget build(BuildContext context) {
+    final String titulo = visId != null && visId! > 0
+        ? "Editar Visita"
+        : "Crear Visita";
+
     return EstructuraBase(
-      barraSuperior: BarraSuperiorState(titulo: "Crear Visita"),
-      vista: const CrearVisitaView(),
+      barraSuperior: BarraSuperiorState(titulo: titulo),
+      vista: CrearVisitaView(visId: visId),
     );
   }
 }
 
 class CrearVisitaView extends ConsumerStatefulWidget {
-  const CrearVisitaView({super.key});
+  final int? visId;
+  const CrearVisitaView({super.key, this.visId});
 
   @override
   ConsumerState<CrearVisitaView> createState() => _CrearVisitaViewState();
@@ -36,7 +43,9 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
 
   void _validarYCrearVisita() {
     if (_formKey.currentState!.validate()) {
-      final notificador = ref.read(crearVisitaScreenProvider.notifier);
+      final notificador = ref.read(
+        crearVisitaScreenProvider(widget.visId).notifier,
+      );
 
       notificador.onCrearVisita().ejecutarConLoading();
     }
@@ -44,19 +53,35 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
 
   @override
   Widget build(BuildContext context) {
-    final estado = ref.watch(crearVisitaScreenProvider);
-    final notificador = ref.read(crearVisitaScreenProvider.notifier);
+    final estado = ref.watch(crearVisitaScreenProvider(widget.visId));
+    final notificador = ref.read(
+      crearVisitaScreenProvider(widget.visId).notifier,
+    );
 
-    ref.listen(crearVisitaScreenProvider.select((s) => s.mensajeUi), (_, next) {
-      if (next != null) DialogoMensajeUI(mensajeUI: next).show(context);
-    });
+    final bool esEdicion = estado.visId > 0;
 
-    ref.listen(crearVisitaScreenProvider.select((s) => s.eventoUI), (_, next) {
-      if (next != null) {
-        DialogoMensajeUI(mensajeUI: next).show(context);
-        _formKey.currentState?.reset();
-      }
-    });
+    ref.listen(
+      crearVisitaScreenProvider(widget.visId).select((s) => s.mensajeUi),
+      (_, next) {
+        if (next != null) DialogoMensajeUI(mensajeUI: next).show(context);
+      },
+    );
+
+    ref.listen(
+      crearVisitaScreenProvider(widget.visId).select((s) => s.eventoUI),
+      (_, next) {
+        if (next != null) {
+          DialogoMensajeUI(mensajeUI: next).show(context);
+          if (!esEdicion) {
+            _formKey.currentState?.reset();
+          }
+        }
+      },
+    );
+
+    if (estado.isCargando && esEdicion) {
+      return const Center(child: CircularProgressIndicator());
+    }
 
     final rutasAsync = ref.watch(obtenerRutaProvider);
     final direccionesAsync = ref.watch(obtenerDireccionClienteProvider);
@@ -84,7 +109,7 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // --- CAMPO 1: SELECCIONAR RUTA (rutId) ---
+                      // SELECCIONAR RUTA
                       const CustomText.etiqueta(
                         "Ruta asignada:",
                         color: Colors.black,
@@ -134,7 +159,7 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                       ),
                       const SizedBox(height: 16),
 
-                      // --- CAMPO 2: SELECCIONAR DIRECCIÓN CLIENTE (dirClId) ---
+                      // SELECCIONAR DIRECCIÓN CLIENTE
                       const CustomText.etiqueta(
                         "Dirección del cliente:",
                         color: Colors.black,
@@ -188,13 +213,14 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                       ),
                       const SizedBox(height: 16),
 
-                      // --- CAMPO 3: COMENTARIO (visComentario) ---
+                      // COMENTARIO
                       const CustomText.etiqueta(
                         "Comentario de la visita:",
                         color: Colors.black,
                       ),
                       const SizedBox(height: 8),
                       CustomTexFormFiledComentarios(
+                        initialValue: estado.visComentario,
                         labelText: "Comentario",
                         hintText: "Agrega observaciones sobre la visita...",
                         onChanged: notificador.onCambioVisComentario,
@@ -207,10 +233,14 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                       ),
                       const SizedBox(height: 24),
 
-                      // --- BOTÓN DE CREACIÓN ---
+                      // BOTÓN DE CREACIÓN / EDICIÓN
                       CustomElevatedButton(
-                        etiqueta: "Crear Visita",
-                        icono: Icons.check_circle_outline,
+                        etiqueta: esEdicion
+                            ? "Guardar Cambios"
+                            : "Crear Visita",
+                        icono: esEdicion
+                            ? Icons.save
+                            : Icons.check_circle_outline,
                         onClick: _validarYCrearVisita,
                         expandir: true,
                       ),

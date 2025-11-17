@@ -5,16 +5,26 @@ import 'package:med_geo_asistencia/features/infraestructure/contratos/ruta/repos
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/mensaje_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/crear_ruta_screen/providers/crear_ruta_screen_state.dart';
 
-final crearRutaScreenProvider = StateNotifierProvider.autoDispose((ref) {
-  final rutaRepositorio = ref.read(rutaRepositoryProvider);
-  return CrearRutaScreenNotifier(rutaRepositorio: rutaRepositorio);
-});
+final crearRutaScreenProvider = StateNotifierProvider.autoDispose
+    .family<CrearRutaScreenNotifier, CrearRutaScreenState, int?>((ref, rutId) {
+      final rutaRepositorio = ref.read(rutaRepositoryProvider);
+      final notifier = CrearRutaScreenNotifier(
+        rutaRepositorio: rutaRepositorio,
+        rutIdInicial: rutId,
+      );
+
+      if (rutId != null && rutId > 0) {
+        notifier.cargarRutaParaEdicion(rutId);
+      }
+
+      return notifier;
+    });
 
 class CrearRutaScreenNotifier extends StateNotifier<CrearRutaScreenState> {
   final RutaRepository rutaRepositorio;
 
-  CrearRutaScreenNotifier({required this.rutaRepositorio})
-    : super(CrearRutaScreenState());
+  CrearRutaScreenNotifier({required this.rutaRepositorio, int? rutIdInicial})
+    : super(CrearRutaScreenState(rutId: rutIdInicial ?? 0));
 
   void onCambioVenId(int valor) {
     state = state.copyWith(venId: valor);
@@ -37,45 +47,104 @@ class CrearRutaScreenNotifier extends StateNotifier<CrearRutaScreenState> {
   }
 
   void onResetearFormulario() {
-    state = CrearRutaScreenState();
+    state = CrearRutaScreenState(rutId: state.rutId);
+  }
+
+  // Cargar datos de la ruta para edición
+  Future<void> cargarRutaParaEdicion(int rutId) async {
+    state = state.copyWith(isCargando: true);
+    try {
+      final ruta = await rutaRepositorio.obtenerRutaId(rutId);
+
+      state = state.copyWith(
+        venId: ruta.venId,
+        supId: ruta.supId,
+        rutNombre: ruta.rutNombre,
+        rutComentario: ruta.rutComentario,
+        rutFechaEjecucion: ruta.rutFechaEjecucion,
+        isCargando: false,
+        rutId: rutId,
+      );
+    } catch (e, stackTrace) {
+      state = state.copyWith(
+        isCargando: false,
+        mensajeUi: MensajeUI.errorMensaje(
+          "Error al cargar datos de la ruta $rutId: $e",
+          stackTrace: stackTrace,
+        ),
+      );
+    }
+  }
+
+  // Lógica de Edición
+  Future<Ruta> onEditarRuta() async {
+    final rutaActualizada = Ruta(
+      rutId: state.rutId,
+      venId: state.venId,
+      supId: state.supId,
+      rutNombre: state.rutNombre,
+      rutComentario: state.rutComentario,
+      rutFechaEjecucion: state.rutFechaEjecucion!,
+      nombreVendedor: "",
+      nombreSupervisor: null,
+    );
+
+    return await rutaRepositorio.editarRuta(rutaActualizada);
   }
 
   // Crear ruta
-  Future<void> onCrearRuta() async {
-    try {
-      if (state.rutFechaEjecucion == null) {
-        state = state.copyWith(
-          mensajeUi: MensajeUI.errorMensaje(
-            "Debe seleccionar una fecha de ejecución",
-          ),
-        );
-        return;
-      }
+  Future<Ruta> onCrearRuta() async {
+    final nuevaRuta = Ruta(
+      rutId: 0,
+      venId: state.venId,
+      supId: state.supId,
+      rutNombre: state.rutNombre,
+      rutComentario: state.rutComentario,
+      rutFechaEjecucion: state.rutFechaEjecucion!,
+      nombreVendedor: "",
+      nombreSupervisor: null,
+    );
 
-      final nuevaRuta = Ruta(
-        rutId: 0,
-        venId: state.venId,
-        supId: state.supId,
-        rutNombre: state.rutNombre,
-        rutComentario: state.rutComentario,
-        rutFechaEjecucion: state.rutFechaEjecucion!,
-        nombreVendedor: "",
-        nombreSupervisor: null,
+    return await rutaRepositorio.crearRuta(nuevaRuta);
+  }
+
+  // Decide si crear o editar
+  Future<void> onGuardarRuta() async {
+    if (state.rutFechaEjecucion == null) {
+      state = state.copyWith(
+        mensajeUi: MensajeUI.errorMensaje(
+          "Debe seleccionar una fecha de ejecución",
+        ),
       );
+      return;
+    }
 
-      final rutaCreada = await rutaRepositorio.crearRuta(nuevaRuta);
+    try {
+      final bool esEdicion = state.rutId > 0;
+      final Ruta rutaResultado;
+      final String accion;
+
+      if (esEdicion) {
+        rutaResultado = await onEditarRuta();
+        accion = "actualizada";
+      } else {
+        rutaResultado = await onCrearRuta();
+        accion = "creada";
+      }
 
       state = state.copyWith(
         eventoUI: MensajeUI.okMensaje(
-          "Ruta creada con éxito: ${rutaCreada.rutNombre}",
+          "Ruta ${rutaResultado.rutNombre} $accion con éxito.",
         ),
       );
 
-      onResetearFormulario();
+      if (!esEdicion) {
+        onResetearFormulario();
+      }
     } catch (e, stackTrace) {
       state = state.copyWith(
         mensajeUi: MensajeUI.errorMensaje(
-          "Error al crear ruta: $e",
+          "Error al ${state.rutId > 0 ? 'actualizar' : 'crear'} ruta: $e",
           stackTrace: stackTrace,
         ),
       );

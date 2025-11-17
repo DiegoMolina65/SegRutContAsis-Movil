@@ -1,40 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:med_geo_asistencia/features/presentation/core/componentes/card/CustomCardRuta.dart';
+import 'package:med_geo_asistencia/features/presentation/core/componentes/card/CustomCardVisita.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/export_custom_formulario.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/barra_superior_state.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/estructura_base.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/views/dialogo_mensaje_ui.dart';
-import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/lista_ruta_screen/providers/lista_ruta_screen_provider.dart';
-import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/crear_ruta_screen/crear_ruta_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/crear_visita_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/lista_visita_screen/providers/lista_visita_screen_provider.dart';
 
-class ListaRutaScreen extends StatelessWidget {
-  static const nombreRuta = '/lista-ruta-screen';
+class ListaVisitaScreen extends StatelessWidget {
+  static const nombreRuta = '/lista-visita-screen';
 
-  const ListaRutaScreen({super.key});
+  const ListaVisitaScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return EstructuraBase(
-      barraSuperior: const BarraSuperiorState(titulo: "Mis Rutas"),
-      vista: const ListaRutaView(),
+      barraSuperior: const BarraSuperiorState(titulo: "Mis Visitas"),
+      vista: const ListaVisitaView(),
     );
   }
 }
 
-class ListaRutaView extends ConsumerWidget {
-  const ListaRutaView({super.key});
+class ListaVisitaView extends ConsumerWidget {
+  const ListaVisitaView({super.key});
 
   void _mostrarConfirmacionEliminar(
     BuildContext context,
     WidgetRef ref,
-    int rutId,
+    int visId,
   ) {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
         title: const Text("Confirmar Eliminación"),
-        content: Text("¿Estás seguro de que deseas desactivar la Ruta $rutId?"),
+        content: Text(
+          "¿Estás seguro de que deseas desactivar la Visita $visId?",
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.of(ctx).pop(),
@@ -43,7 +45,9 @@ class ListaRutaView extends ConsumerWidget {
           TextButton(
             onPressed: () {
               Navigator.of(ctx).pop();
-              ref.read(listaRutaScreenProvider.notifier).onEliminarRuta(rutId);
+              ref
+                  .read(listaVisitaScreenProvider.notifier)
+                  .onEliminarVisita(visId);
             },
             style: TextButton.styleFrom(
               foregroundColor: Theme.of(context).colorScheme.error,
@@ -57,18 +61,18 @@ class ListaRutaView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final estado = ref.watch(listaRutaScreenProvider);
-    final notificador = ref.read(listaRutaScreenProvider.notifier);
+    final estado = ref.watch(listaVisitaScreenProvider);
+    final notificador = ref.read(listaVisitaScreenProvider.notifier);
 
     final isCargando = estado.isCargando;
 
     // Listener para errores
-    ref.listen(listaRutaScreenProvider.select((s) => s.mensajeUi), (_, next) {
+    ref.listen(listaVisitaScreenProvider.select((s) => s.mensajeUi), (_, next) {
       if (next != null) DialogoMensajeUI(mensajeUI: next).show(context);
     });
 
     // Listener para eventos (Navegación o Mensajes de éxito)
-    ref.listen(listaRutaScreenProvider.select((s) => s.eventoUI), (
+    ref.listen(listaVisitaScreenProvider.select((s) => s.eventoUI), (
       _,
       next,
     ) async {
@@ -76,22 +80,22 @@ class ListaRutaView extends ConsumerWidget {
         DialogoMensajeUI(mensajeUI: next).show(context);
 
         if (next.datosExtras is int) {
-          final rutId = next.datosExtras as int;
-          if (rutId > 0) {
+          final visId = next.datosExtras as int;
+          if (visId > 0) {
             await Navigator.of(
               context,
-            ).pushNamed(CrearRutaScreen.nombreRuta, arguments: rutId);
-            notificador.obtenerRutas();
+            ).pushNamed(CrearVisitaScreen.nombreRuta, arguments: visId);
+            notificador.obtenerVisitas();
           }
         }
       }
     });
 
-    if (isCargando && estado.rutas.isEmpty) {
+    if (isCargando && estado.visitas.isEmpty) {
       return const Center(child: CircularProgressIndicator());
     }
 
-    if (estado.rutas.isEmpty) {
+    if (estado.visitas.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -99,16 +103,16 @@ class ListaRutaView extends ConsumerWidget {
             const Icon(Icons.route_outlined, size: 60, color: Colors.grey),
             const SizedBox(height: 16),
             const Text(
-              "No tienes rutas asignadas.",
+              "No tienes visitas asignadas.",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
             const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: CustomElevatedButton(
-                etiqueta: "Recargar Rutas",
+                etiqueta: "Recargar Visitas",
                 icono: Icons.refresh,
-                onClick: notificador.obtenerRutas,
+                onClick: notificador.obtenerVisitas,
                 cargando: isCargando,
                 expandir: true,
               ),
@@ -118,21 +122,21 @@ class ListaRutaView extends ConsumerWidget {
       );
     }
 
-    // Listado de Rutas
+    // Listado de visitas
     return RefreshIndicator(
-      onRefresh: notificador.obtenerRutas,
+      onRefresh: notificador.obtenerVisitas,
       child: ListView.builder(
-        itemCount: estado.rutas.length,
+        itemCount: estado.visitas.length,
         itemBuilder: (context, index) {
-          final ruta = estado.rutas[index];
-          return CustomCardRuta(
-            ruta: ruta,
+          final visita = estado.visitas[index];
+          return CustomCardVisita(
+            visita: visita,
             onTap: () {
               // Lógica al presionar la tarjeta
             },
-            onEdit: () => notificador.onEditarRuta(ruta.rutId),
+            onEdit: () => notificador.onEditarVisita(visita.visId),
             onDelete: () =>
-                _mostrarConfirmacionEliminar(context, ref, ruta.rutId),
+                _mostrarConfirmacionEliminar(context, ref, visita.visId),
           );
         },
       ),

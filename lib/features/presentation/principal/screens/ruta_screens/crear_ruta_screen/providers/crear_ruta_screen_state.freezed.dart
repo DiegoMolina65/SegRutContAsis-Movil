@@ -14,7 +14,8 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CrearRutaScreenState {
 
- MensajeUI? get mensajeUi; MensajeUI? get eventoUI;/// Campos del formulario
+ MensajeUI? get mensajeUi; MensajeUI? get eventoUI;/// Campo para Edición (si > 0, estamos en modo edición)
+ int get rutId;/// Campos del formulario
  int get venId; int get supId; String get rutNombre; String get rutComentario; DateTime? get rutFechaEjecucion; bool get isCargando;
 /// Create a copy of CrearRutaScreenState
 /// with the given fields replaced by the non-null parameter values.
@@ -26,16 +27,16 @@ $CrearRutaScreenStateCopyWith<CrearRutaScreenState> get copyWith => _$CrearRutaS
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearRutaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.venId, venId) || other.venId == venId)&&(identical(other.supId, supId) || other.supId == supId)&&(identical(other.rutNombre, rutNombre) || other.rutNombre == rutNombre)&&(identical(other.rutComentario, rutComentario) || other.rutComentario == rutComentario)&&(identical(other.rutFechaEjecucion, rutFechaEjecucion) || other.rutFechaEjecucion == rutFechaEjecucion)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearRutaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.venId, venId) || other.venId == venId)&&(identical(other.supId, supId) || other.supId == supId)&&(identical(other.rutNombre, rutNombre) || other.rutNombre == rutNombre)&&(identical(other.rutComentario, rutComentario) || other.rutComentario == rutComentario)&&(identical(other.rutFechaEjecucion, rutFechaEjecucion) || other.rutFechaEjecucion == rutFechaEjecucion)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,venId,supId,rutNombre,rutComentario,rutFechaEjecucion,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,rutId,venId,supId,rutNombre,rutComentario,rutFechaEjecucion,isCargando);
 
 @override
 String toString() {
-  return 'CrearRutaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, venId: $venId, supId: $supId, rutNombre: $rutNombre, rutComentario: $rutComentario, rutFechaEjecucion: $rutFechaEjecucion, isCargando: $isCargando)';
+  return 'CrearRutaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, rutId: $rutId, venId: $venId, supId: $supId, rutNombre: $rutNombre, rutComentario: $rutComentario, rutFechaEjecucion: $rutFechaEjecucion, isCargando: $isCargando)';
 }
 
 
@@ -46,7 +47,7 @@ abstract mixin class $CrearRutaScreenStateCopyWith<$Res>  {
   factory $CrearRutaScreenStateCopyWith(CrearRutaScreenState value, $Res Function(CrearRutaScreenState) _then) = _$CrearRutaScreenStateCopyWithImpl;
 @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int venId, int supId, String rutNombre, String rutComentario, DateTime? rutFechaEjecucion, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime? rutFechaEjecucion, bool isCargando
 });
 
 
@@ -63,11 +64,12 @@ class _$CrearRutaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearRutaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = freezed,Object? isCargando = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = freezed,Object? isCargando = null,}) {
   return _then(_self.copyWith(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
-as MensajeUI?,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
+as MensajeUI?,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
+as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
 as int,supId: null == supId ? _self.supId : supId // ignore: cast_nullable_to_non_nullable
 as int,rutNombre: null == rutNombre ? _self.rutNombre : rutNombre // ignore: cast_nullable_to_non_nullable
 as String,rutComentario: null == rutComentario ? _self.rutComentario : rutComentario // ignore: cast_nullable_to_non_nullable
@@ -182,10 +184,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CrearRutaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
   return orElse();
 
 }
@@ -203,10 +205,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rut
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)  $default,) {final _that = this;
 switch (_that) {
 case _CrearRutaScreenState():
-return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -223,10 +225,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rut
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime? rutFechaEjecucion,  bool isCargando)?  $default,) {final _that = this;
 switch (_that) {
 case _CrearRutaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.isCargando);case _:
   return null;
 
 }
@@ -238,11 +240,13 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.venId,_that.supId,_that.rut
 
 
 class _CrearRutaScreenState extends CrearRutaScreenState {
-  const _CrearRutaScreenState({this.mensajeUi, this.eventoUI, this.venId = 0, this.supId = 0, this.rutNombre = "", this.rutComentario = "", this.rutFechaEjecucion, this.isCargando = false}): super._();
+  const _CrearRutaScreenState({this.mensajeUi, this.eventoUI, this.rutId = 0, this.venId = 0, this.supId = 0, this.rutNombre = "", this.rutComentario = "", this.rutFechaEjecucion, this.isCargando = false}): super._();
   
 
 @override final  MensajeUI? mensajeUi;
 @override final  MensajeUI? eventoUI;
+/// Campo para Edición (si > 0, estamos en modo edición)
+@override@JsonKey() final  int rutId;
 /// Campos del formulario
 @override@JsonKey() final  int venId;
 @override@JsonKey() final  int supId;
@@ -261,16 +265,16 @@ _$CrearRutaScreenStateCopyWith<_CrearRutaScreenState> get copyWith => __$CrearRu
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearRutaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.venId, venId) || other.venId == venId)&&(identical(other.supId, supId) || other.supId == supId)&&(identical(other.rutNombre, rutNombre) || other.rutNombre == rutNombre)&&(identical(other.rutComentario, rutComentario) || other.rutComentario == rutComentario)&&(identical(other.rutFechaEjecucion, rutFechaEjecucion) || other.rutFechaEjecucion == rutFechaEjecucion)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearRutaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.rutId, rutId) || other.rutId == rutId)&&(identical(other.venId, venId) || other.venId == venId)&&(identical(other.supId, supId) || other.supId == supId)&&(identical(other.rutNombre, rutNombre) || other.rutNombre == rutNombre)&&(identical(other.rutComentario, rutComentario) || other.rutComentario == rutComentario)&&(identical(other.rutFechaEjecucion, rutFechaEjecucion) || other.rutFechaEjecucion == rutFechaEjecucion)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,venId,supId,rutNombre,rutComentario,rutFechaEjecucion,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,rutId,venId,supId,rutNombre,rutComentario,rutFechaEjecucion,isCargando);
 
 @override
 String toString() {
-  return 'CrearRutaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, venId: $venId, supId: $supId, rutNombre: $rutNombre, rutComentario: $rutComentario, rutFechaEjecucion: $rutFechaEjecucion, isCargando: $isCargando)';
+  return 'CrearRutaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, rutId: $rutId, venId: $venId, supId: $supId, rutNombre: $rutNombre, rutComentario: $rutComentario, rutFechaEjecucion: $rutFechaEjecucion, isCargando: $isCargando)';
 }
 
 
@@ -281,7 +285,7 @@ abstract mixin class _$CrearRutaScreenStateCopyWith<$Res> implements $CrearRutaS
   factory _$CrearRutaScreenStateCopyWith(_CrearRutaScreenState value, $Res Function(_CrearRutaScreenState) _then) = __$CrearRutaScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int venId, int supId, String rutNombre, String rutComentario, DateTime? rutFechaEjecucion, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime? rutFechaEjecucion, bool isCargando
 });
 
 
@@ -298,11 +302,12 @@ class __$CrearRutaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearRutaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = freezed,Object? isCargando = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = freezed,Object? isCargando = null,}) {
   return _then(_CrearRutaScreenState(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
-as MensajeUI?,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
+as MensajeUI?,rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
+as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
 as int,supId: null == supId ? _self.supId : supId // ignore: cast_nullable_to_non_nullable
 as int,rutNombre: null == rutNombre ? _self.rutNombre : rutNombre // ignore: cast_nullable_to_non_nullable
 as String,rutComentario: null == rutComentario ? _self.rutComentario : rutComentario // ignore: cast_nullable_to_non_nullable

@@ -5,16 +5,31 @@ import 'package:med_geo_asistencia/features/infraestructure/contratos/visita/rep
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/mensaje_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/providers/crear_visita_screen_state.dart';
 
-final crearVisitaScreenProvider = StateNotifierProvider.autoDispose((ref) {
-  final visitaRepositorio = ref.read(visitaRepositoryProvider);
-  return CrearVisitaScreenNotifier(visitaRepositorio: visitaRepositorio);
-});
+final crearVisitaScreenProvider = StateNotifierProvider.autoDispose
+    .family<CrearVisitaScreenNotifier, CrearVisitaScreenState, int?>((
+      ref,
+      visId,
+    ) {
+      final visitaRepositorio = ref.read(visitaRepositoryProvider);
+      final notifier = CrearVisitaScreenNotifier(
+        visitaRepositorio: visitaRepositorio,
+        visIdInicial: visId,
+      );
+
+      if (visId != null && visId > 0) {
+        notifier.cargarVisitaParaEdicion(visId);
+      }
+
+      return notifier;
+    });
 
 class CrearVisitaScreenNotifier extends StateNotifier<CrearVisitaScreenState> {
   final VisitaRepository visitaRepositorio;
 
-  CrearVisitaScreenNotifier({required this.visitaRepositorio})
-    : super(CrearVisitaScreenState());
+  CrearVisitaScreenNotifier({
+    required this.visitaRepositorio,
+    int? visIdInicial,
+  }) : super(CrearVisitaScreenState(visId: visIdInicial ?? 0));
 
   void onCambioRutId(int valor) {
     state = state.copyWith(rutId: valor);
@@ -29,64 +44,128 @@ class CrearVisitaScreenNotifier extends StateNotifier<CrearVisitaScreenState> {
   }
 
   void onResetearFormulario() {
-    state = CrearVisitaScreenState();
+    state = CrearVisitaScreenState(visId: state.visId);
   }
 
-  // Crear visita
-  Future<void> onCrearVisita() async {
+  // Cargar datos de la visita para edición
+  Future<void> cargarVisitaParaEdicion(int visId) async {
+    state = state.copyWith(isCargando: true);
     try {
-      if (state.rutId == 0) {
-        state = state.copyWith(
-          mensajeUi: MensajeUI.errorMensaje("Seleccione una RUTA"),
-        );
-        return;
-      }
+      final visita = await visitaRepositorio.obtenerVisitaId(visId);
 
-      if (state.dirClId == 0) {
-        state = state.copyWith(
-          mensajeUi: MensajeUI.errorMensaje("Seleccione una DIRECCION"),
-        );
-        return;
-      }
-
-      if (state.visComentario == "") {
-        state = state.copyWith(
-          mensajeUi: MensajeUI.errorMensaje("Escriba un COMENTARIO"),
-        );
-        return;
-      }
-
-      final nuevaVisita = Visita(
-        visId: 0,
-        rutId: state.rutId,
-        dirClId: state.dirClId,
-        visComentario: state.visComentario,
-        direccion: "",
-        fechaEjecucionRuta: DateTime.now(),
-        visEstadoDel: false,
-        nombreCliente: "",
-        nombreSucursalCliente: "",
-        sucursalLatitud: 0.0,
-        sucursalLongitud: 0.0,
-        nombreZona: "",
-        nombreVendedor: "",
-        nombreRuta: "",
-        visFechaCreacion: DateTime.now(),
+      state = state.copyWith(
+        rutId: visita.rutId,
+        dirClId: visita.dirClId,
+        visComentario: visita.visComentario,
+        isCargando: false,
+        visId: visId,
       );
+    } catch (e, stackTrace) {
+      state = state.copyWith(
+        isCargando: false,
+        mensajeUi: MensajeUI.errorMensaje(
+          "Error al cargar datos de la visita $visId: $e",
+          stackTrace: stackTrace,
+        ),
+      );
+    }
+  }
 
-      final visitaCreada = await visitaRepositorio.crearVisita(nuevaVisita);
+  // Lógica de Edición
+  Future<Visita> onEditarVisita() async {
+    final visitaActualizada = Visita(
+      visId: state.visId,
+      rutId: state.rutId,
+      dirClId: state.dirClId,
+      visComentario: state.visComentario,
+      direccion: "",
+      fechaEjecucionRuta: DateTime.now(),
+      visEstadoDel: false,
+      nombreCliente: "",
+      nombreSucursalCliente: "",
+      sucursalLatitud: 0.0,
+      sucursalLongitud: 0.0,
+      nombreZona: "",
+      nombreVendedor: "",
+      nombreRuta: "",
+      visFechaCreacion: DateTime.now(),
+    );
+
+    return await visitaRepositorio.editarVisita(visitaActualizada);
+  }
+
+  // Lógica de Creación
+  Future<Visita> onCrearVisita() async {
+    final nuevaVisita = Visita(
+      visId: 0,
+      rutId: state.rutId,
+      dirClId: state.dirClId,
+      visComentario: state.visComentario,
+      direccion: "",
+      fechaEjecucionRuta: DateTime.now(),
+      visEstadoDel: false,
+      nombreCliente: "",
+      nombreSucursalCliente: "",
+      sucursalLatitud: 0.0,
+      sucursalLongitud: 0.0,
+      nombreZona: "",
+      nombreVendedor: "",
+      nombreRuta: "",
+      visFechaCreacion: DateTime.now(),
+    );
+
+    return await visitaRepositorio.crearVisita(nuevaVisita);
+  }
+
+  // Decide si crear o editar
+  Future<void> onGuardarVisita() async {
+    if (state.rutId == 0) {
+      state = state.copyWith(
+        mensajeUi: MensajeUI.errorMensaje("Seleccione una RUTA"),
+      );
+      return;
+    }
+
+    if (state.dirClId == 0) {
+      state = state.copyWith(
+        mensajeUi: MensajeUI.errorMensaje("Seleccione una DIRECCION"),
+      );
+      return;
+    }
+
+    if (state.visComentario == "") {
+      state = state.copyWith(
+        mensajeUi: MensajeUI.errorMensaje("Escriba un COMENTARIO"),
+      );
+      return;
+    }
+
+    try {
+      final bool esEdicion = state.visId > 0;
+      final Visita visitaResultado;
+      final String accion;
+
+      if (esEdicion) {
+        visitaResultado = await onEditarVisita();
+        accion = "actualizada";
+      } else {
+        visitaResultado = await onCrearVisita();
+        accion = "creada";
+      }
 
       state = state.copyWith(
         eventoUI: MensajeUI.okMensaje(
-          "visita creada con éxito: ${visitaCreada.visId}",
+          "Visita ${visitaResultado.visId} $accion con éxito.",
         ),
       );
 
-      onResetearFormulario();
+      if (!esEdicion) {
+        onResetearFormulario();
+      }
     } catch (e, stackTrace) {
       state = state.copyWith(
         mensajeUi: MensajeUI.errorMensaje(
-          "Error al crear ruta: $e",
+          "Error al ${state.visId > 0 ? 'actualizar' : 'crear'} visita: $e",
           stackTrace: stackTrace,
         ),
       );

@@ -28,6 +28,7 @@ class CustomTexFormFiledComentarios extends StatefulWidget {
   final TextInputAction? textInputAction;
   final bool requerido;
   final String? mensajeValidacion;
+  final String? initialValue;
 
   const CustomTexFormFiledComentarios({
     super.key,
@@ -57,6 +58,7 @@ class CustomTexFormFiledComentarios extends StatefulWidget {
     this.textInputAction,
     this.requerido = false,
     this.mensajeValidacion,
+    this.initialValue,
   });
 
   @override
@@ -72,7 +74,9 @@ class _CustomTexFormFiledComentariosState
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? TextEditingController();
+    _controller =
+        widget.controller ?? TextEditingController(text: widget.initialValue);
+
     _caracteresActuales = _controller.text.length;
     _controller.addListener(_actualizarContador);
   }
@@ -174,7 +178,7 @@ class _CustomTexFormFiledComentariosState
             widget.contentPadding ??
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         alignLabelWithHint: true,
-        counterText: '', // Ocultar el contador por defecto de Flutter
+        counterText: '',
         border:
             widget.border ??
             OutlineInputBorder(
