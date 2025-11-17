@@ -10,4 +10,14 @@ class UsuarioDatasourceRemotoImpl implements UsuarioDatasourceRemoto {
   Future<Resultado<Usuario>> loginUsuario(String usuario, String contrasena) {
     return apicliente.loginUsuario(usuario, contrasena);
   }
+
+  @override
+  Future<List<Usuario>> obtenerSupervisores() {
+    return apicliente.obtenerSupervisores();
+  }
+
+  @override
+  Future<List<Usuario>> obtenerVendedores() {
+    return apicliente.obtenerVendedores();
+  }
 }

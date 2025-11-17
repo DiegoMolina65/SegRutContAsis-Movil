@@ -18,6 +18,8 @@ class CustomSelectCustom<T> extends StatefulWidget {
   final Color? fillColor;
   final bool filled;
   final double maxHeight;
+  final bool requerido;
+  final String? mensajeValidacion;
 
   const CustomSelectCustom({
     super.key,
@@ -38,6 +40,8 @@ class CustomSelectCustom<T> extends StatefulWidget {
     this.fillColor,
     this.filled = true,
     this.maxHeight = 300,
+    this.requerido = false,
+    this.mensajeValidacion,
   });
 
   @override
@@ -51,6 +55,7 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
   final FocusNode _searchFocus = FocusNode();
   List<T> _itemsFiltrados = [];
   bool _isOpen = false;
+  String? _errorText;
 
   @override
   void initState() {
@@ -103,7 +108,28 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
 
   void _seleccionarItem(T? item) {
     widget.onChanged?.call(item);
+    _validar(item);
     _cerrarDropdown();
+  }
+
+  void _validar(T? value) {
+    setState(() {
+      // Si hay un validator personalizado, úsalo
+      if (widget.validator != null) {
+        _errorText = widget.validator!(value);
+        return;
+      }
+
+      // Si el campo es requerido, valida que no sea null
+      if (widget.requerido) {
+        if (value == null) {
+          _errorText = widget.mensajeValidacion ?? 'Este campo es requerido';
+          return;
+        }
+      }
+
+      _errorText = null;
+    });
   }
 
   OverlayEntry _crearOverlayEntry() {
@@ -262,6 +288,7 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
           decoration: InputDecoration(
             labelText: widget.labelText,
             hintText: widget.hintText,
+            errorText: _errorText,
             prefixIcon: widget.prefixIcon,
             suffixIcon: Icon(
               _isOpen ? Icons.arrow_drop_up : Icons.arrow_drop_down,
@@ -304,6 +331,15 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
                 OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
                   borderSide: BorderSide(color: theme.colorScheme.error),
+                ),
+            focusedErrorBorder:
+                widget.border ??
+                OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                  borderSide: BorderSide(
+                    color: theme.colorScheme.error,
+                    width: 2,
+                  ),
                 ),
             disabledBorder:
                 widget.border ??

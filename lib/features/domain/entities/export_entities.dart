@@ -8,3 +8,4 @@ export '../entities/visita/visita.dart';
 export '../entities/seguimiento_vendedor/seguimiento_vendedor.dart';
 export '../entities/zona/zona.dart';
 export '../entities/evidencia/evidencia.dart';
+export '../entities/direccion_cliente/direccion_cliente.dart';

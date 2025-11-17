@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:med_geo_asistencia/features/presentation/login/provider/autenticacion_estatus.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/asistencia_screens/asistencia_entrada_screen/asistencia_entrada_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/asistencia_screens/asistencia_salida_screen/asistencia_salida_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/cliente_screens/crear_cliente_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/crear_ruta_screen/crear_ruta_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/crear_visita_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/screens_referencias.dart';
 
 import 'app_router_notifier.dart';
@@ -34,6 +39,27 @@ final goRouterProvider = Provider((ref) {
         path: PrincipalScreen.nombreRuta,
         builder: (context, state) => const PrincipalScreen(),
       ),
+      GoRoute(
+        path: CrearRutaScreen.nombreRuta,
+        builder: (context, state) => const CrearRutaScreen(),
+      ),
+      GoRoute(
+        path: CrearClienteScreen.nombreRuta,
+        builder: (context, state) => const CrearClienteScreen(),
+      ),
+      GoRoute(
+        path: CrearVisitaScreen.nombreRuta,
+        builder: (context, state) => const CrearVisitaScreen(),
+      ),
+      GoRoute(
+        path: AsistenciaEntradaScreen.nombreRuta,
+        builder: (context, state) => const AsistenciaEntradaScreen(),
+      ),
+      GoRoute(
+        path: AsistenciaSalidaScreen.nombreRuta,
+        builder: (context, state) => const AsistenciaSalidaScreen(),
+      ),
+      // GoRoute(
       // GoRoute(
       //   path: MarcacionScreen.nombreRuta,
       //   builder: (context, state) => const MarcacionScreen(),
@@ -143,10 +169,9 @@ final goRouterProvider = Provider((ref) {
       }
 
       if (authStatus == AutenticacionEstatus.autenticado) {
-        if (isGoingTo ==
-            LoginScreen.nombreRuta) {
+        if (isGoingTo == LoginScreen.nombreRuta) {
           /// Si no es las anteriores mandamos al menu principal
-          return PrincipalScreen.nombreRuta;
+          return AsistenciaSalidaScreen.nombreRuta;
         }
       }
 

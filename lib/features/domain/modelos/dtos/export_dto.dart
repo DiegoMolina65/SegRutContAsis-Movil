@@ -8,3 +8,4 @@ export '../dtos/visita/visita_dto.dart';
 export '../dtos/seguimiento_vendedor/seguimiento_vendedor_dto.dart';
 export '../dtos/zona/zona_dto.dart';
 export '../dtos/evidencia/evidencia_dto.dart';
+export '../dtos/direccion_cliente/direccion_cliente_dto.dart';

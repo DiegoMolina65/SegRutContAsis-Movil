@@ -26,6 +26,8 @@ class CustomTexFormFiledComentarios extends StatefulWidget {
   final Color? fillColor;
   final bool filled;
   final TextInputAction? textInputAction;
+  final bool requerido;
+  final String? mensajeValidacion;
 
   const CustomTexFormFiledComentarios({
     super.key,
@@ -53,6 +55,8 @@ class CustomTexFormFiledComentarios extends StatefulWidget {
     this.fillColor,
     this.filled = true,
     this.textInputAction,
+    this.requerido = false,
+    this.mensajeValidacion,
   });
 
   @override
@@ -119,6 +123,22 @@ class _CustomTexFormFiledComentariosState
     return Theme.of(context).colorScheme.onSurfaceVariant;
   }
 
+  String? _validarCampo(String? value) {
+    // Si hay un validator personalizado, úsalo
+    if (widget.validator != null) {
+      return widget.validator!(value);
+    }
+
+    // Si el campo es requerido, valida que no esté vacío
+    if (widget.requerido) {
+      if (value == null || value.trim().isEmpty) {
+        return widget.mensajeValidacion ?? 'Este campo es requerido';
+      }
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -127,7 +147,7 @@ class _CustomTexFormFiledComentariosState
       controller: _controller,
       focusNode: widget.focusNode,
       onChanged: widget.onChanged,
-      validator: widget.validator,
+      validator: _validarCampo,
       onSaved: widget.onSaved,
       textInputAction: widget.textInputAction ?? TextInputAction.newline,
       readOnly: widget.readOnly,
@@ -149,7 +169,7 @@ class _CustomTexFormFiledComentariosState
         filled: widget.filled,
         fillColor:
             widget.fillColor ??
-            theme.colorScheme.surfaceContainerHighest.withOpacity(0.3),
+            theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.3),
         contentPadding:
             widget.contentPadding ??
             const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -193,7 +213,7 @@ class _CustomTexFormFiledComentariosState
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: BorderSide(
-                color: theme.colorScheme.outline.withOpacity(0.5),
+                color: theme.colorScheme.outline.withValues(alpha: 0.5),
               ),
             ),
       ),

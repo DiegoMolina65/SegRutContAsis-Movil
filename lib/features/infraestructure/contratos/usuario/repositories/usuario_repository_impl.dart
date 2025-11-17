@@ -15,6 +15,15 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
     return dataSourceRemoto.loginUsuario(usuario, contrasena);
   }
 
+  @override
+  Future<List<Usuario>> obtenerSupervisores() {
+    return dataSourceRemoto.obtenerSupervisores();
+  }
+
+  @override
+  Future<List<Usuario>> obtenerVendedores() {
+    return dataSourceRemoto.obtenerVendedores();
+  }
 
   @override
   Future<bool> guardarUsuarioLocal(Usuario usuario) {
@@ -28,7 +37,6 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
     throw UnimplementedError();
   }
 
-
   @override
   Future<Usuario?> obtenerUsuarioLocal(int codigoUsuario) {
     // TODO: implement obtenerUsuarioLocal
@@ -36,7 +44,7 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
   }
 
   @override
-  Future<String> obtenerVersionDualInventario() {
+  Future<String> obtenerVersion() {
     // TODO: implement obtenerVersionDualInventario
     throw UnimplementedError();
   }

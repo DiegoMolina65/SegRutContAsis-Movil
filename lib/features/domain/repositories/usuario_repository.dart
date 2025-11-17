@@ -1,4 +1,3 @@
-
 import 'package:med_geo_asistencia/features/domain/entities/usuario/usuario.dart';
 import 'package:med_geo_asistencia/features/domain/modelos/resultado.dart';
 
@@ -8,6 +7,9 @@ abstract class UsuarioRepository {
   Future<Usuario?> obtenerUsuarioLocal(int codigoUsuario);
   Future<bool> vaciaLocal();
   Future<bool> sincronizarDatosApp(String codigoLocal);
-  Future<String> obtenerVersionDualInventario();
+  Future<String> obtenerVersion();
   Future<List<Usuario>> listaUsuariosPorAlmacen(int codigoAlmacen);
+
+  Future<List<Usuario>> obtenerSupervisores();
+  Future<List<Usuario>> obtenerVendedores();
 }

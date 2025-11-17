@@ -32,6 +32,8 @@ class CustomTextFormField extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
   final Color? fillColor;
   final bool filled;
+  final bool requerido;
+  final String? mensajeValidacion;
 
   const CustomTextFormField({
     super.key,
@@ -65,6 +67,8 @@ class CustomTextFormField extends StatefulWidget {
     this.contentPadding,
     this.fillColor,
     this.filled = true,
+    this.requerido = false,
+    this.mensajeValidacion,
   });
 
   @override
@@ -107,6 +111,20 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
     );
   }
 
+  String? _validarCampo(String? value) {
+    if (widget.validator != null) {
+      return widget.validator!(value);
+    }
+
+    if (widget.requerido) {
+      if (value == null || value.trim().isEmpty) {
+        return widget.mensajeValidacion ?? 'Este campo es requerido';
+      }
+    }
+
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -116,7 +134,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       focusNode: widget.focusNode,
       onChanged: widget.onChanged,
       onFieldSubmitted: widget.onFieldSubmitted,
-      validator: widget.validator,
+      validator: _validarCampo,
       onSaved: widget.onSaved,
       textInputAction: widget.textInputAction,
       keyboardType: widget.keyboardType,
