@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/card/CustomCardVisita.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/export_custom_formulario.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/barra_superior_state.dart';
@@ -82,9 +83,7 @@ class ListaVisitaView extends ConsumerWidget {
         if (next.datosExtras is int) {
           final visId = next.datosExtras as int;
           if (visId > 0) {
-            await Navigator.of(
-              context,
-            ).pushNamed(CrearVisitaScreen.nombreRuta, arguments: visId);
+            await context.push('${CrearVisitaScreen.nombreRuta}/$visId');
             notificador.obtenerVisitas();
           }
         }

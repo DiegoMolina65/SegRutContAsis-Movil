@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:med_geo_asistencia/features/domain/entities/export_entities.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/export_custom_formulario.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/barra_superior_state.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/estructura_base.dart';
 import 'package:med_geo_asistencia/features/presentation/core/helpers/extensiones/loading_overlay_extension.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/views/dialogo_mensaje_ui.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/lista_ruta_screen/lista_ruta_screen.dart';
 import 'package:med_geo_asistencia/shared/provider/obtener_supervisor_vendedor_provider.dart';
 
 import 'providers/asistencia_entrada_screen_provider.dart';
@@ -35,37 +37,49 @@ class AsistenciaEntradaView extends ConsumerStatefulWidget {
 class _AsistenciaEntradaViewState extends ConsumerState<AsistenciaEntradaView> {
   final _formKey = GlobalKey<FormState>();
 
+  // Definimos la función de navegación
+  void _navegarAListaRuta() {
+    context.go(ListaRutaScreen.nombreRuta);
+  }
+
   void _validarYCrearAsistencia() {
     if (_formKey.currentState!.validate()) {
       final notificador = ref.read(
-        crearAsistenciaEntradaScreenProvider.notifier,
+        crearAsistenciaEntradaScreenProvider(_navegarAListaRuta).notifier,
       );
-      notificador.onCrearRuta().ejecutarConLoading();
+      notificador.onCrearAsistenciaEntrada().ejecutarConLoading();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final estado = ref.watch(crearAsistenciaEntradaScreenProvider);
-
-    final notificador = ref.read(crearAsistenciaEntradaScreenProvider.notifier);
+    final estado = ref.watch(
+      crearAsistenciaEntradaScreenProvider(_navegarAListaRuta),
+    );
+    final notificador = ref.read(
+      crearAsistenciaEntradaScreenProvider(_navegarAListaRuta).notifier,
+    );
 
     ref.listen(
-      crearAsistenciaEntradaScreenProvider.select((s) => s.mensajeUi),
+      crearAsistenciaEntradaScreenProvider(
+        _navegarAListaRuta,
+      ).select((s) => s.mensajeUi),
       (_, next) {
         if (next != null) DialogoMensajeUI(mensajeUI: next).show(context);
       },
     );
 
-    ref.listen(crearAsistenciaEntradaScreenProvider.select((s) => s.eventoUI), (
-      _,
-      next,
-    ) {
-      if (next != null) {
-        DialogoMensajeUI(mensajeUI: next).show(context);
-        _formKey.currentState?.reset();
-      }
-    });
+    ref.listen(
+      crearAsistenciaEntradaScreenProvider(
+        _navegarAListaRuta,
+      ).select((s) => s.eventoUI),
+      (_, next) {
+        if (next != null) {
+          DialogoMensajeUI(mensajeUI: next).show(context);
+          _formKey.currentState?.reset();
+        }
+      },
+    );
 
     // Provider que trae supervisores y vendedores
     final dataAsync = ref.watch(obtenerSupervisorVendedorProvider);

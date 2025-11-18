@@ -15,6 +15,8 @@ abstract class DireccionClienteDto with _$DireccionClienteDto {
     required double dirClLatitud,
     required double dirClLongitud,
     required bool dirClEstadoDel,
+    required String? nombreCliente,
+    required String? nombreZona,
   }) = _DireccionClienteDto;
   factory DireccionClienteDto.fromJson(Map<String, Object?> json) =>
       _$DireccionClienteDtoFromJson(json);

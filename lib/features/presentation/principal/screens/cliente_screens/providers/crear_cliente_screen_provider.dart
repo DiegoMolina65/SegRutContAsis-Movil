@@ -86,7 +86,7 @@ class CrearClienteScreenNotifier
 
       state = state.copyWith(
         eventoUI: MensajeUI.okMensaje(
-          "Ruta creada con éxito: ${clienteCreado.clNombreCompleto}",
+          "Cliente creado con éxito: ${clienteCreado.clNombreCompleto}",
         ),
       );
 

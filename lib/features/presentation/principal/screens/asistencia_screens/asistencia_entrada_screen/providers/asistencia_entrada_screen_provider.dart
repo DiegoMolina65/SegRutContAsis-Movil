@@ -6,15 +6,17 @@ import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialog
 import 'package:med_geo_asistencia/features/presentation/principal/screens/asistencia_screens/asistencia_entrada_screen/providers/asistencia_entrada_screen_state.dart';
 import 'package:med_geo_asistencia/shared/provider/geolocator/obtener_ubicacion_actual_provider.dart';
 
-final crearAsistenciaEntradaScreenProvider =
-    StateNotifierProvider.autoDispose<
+final crearAsistenciaEntradaScreenProvider = StateNotifierProvider.autoDispose
+    .family<
       CrearAsistenciaEntradaScreenNotifier,
-      AsistenciaEntradaScreenState
-    >((ref) {
+      AsistenciaEntradaScreenState,
+      Function()
+    >((ref, irAListaRuta) {
       final asistenciaRepositorio = ref.read(asistenciaRepositoryProvider);
       return CrearAsistenciaEntradaScreenNotifier(
         asistenciaRepositorio: asistenciaRepositorio,
         ref: ref,
+        irAListaRuta: irAListaRuta,
       );
     });
 
@@ -22,10 +24,12 @@ class CrearAsistenciaEntradaScreenNotifier
     extends StateNotifier<AsistenciaEntradaScreenState> {
   final AsistenciaRepository asistenciaRepositorio;
   final Ref ref;
+  final Function() irAListaRuta;
 
   CrearAsistenciaEntradaScreenNotifier({
     required this.asistenciaRepositorio,
     required this.ref,
+    required this.irAListaRuta,
   }) : super(AsistenciaEntradaScreenState());
 
   void onCambioVenId(int valor) {
@@ -37,7 +41,7 @@ class CrearAsistenciaEntradaScreenNotifier
   }
 
   // Crear asistencia entrada
-  Future<void> onCrearRuta() async {
+  Future<void> onCrearAsistenciaEntrada() async {
     try {
       if (state.venId == 0) {
         state = state.copyWith(
@@ -66,6 +70,8 @@ class CrearAsistenciaEntradaScreenNotifier
 
       final asistenciaEntradaCreada = await asistenciaRepositorio
           .crearAsistenciaEntradaDia(nuevaAsistenciaEntrada);
+
+      irAListaRuta();
 
       state = state.copyWith(
         eventoUI: MensajeUI.okMensaje(

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:intl/intl.dart';
 import 'package:med_geo_asistencia/config/constantes/environment.dart';
 import 'package:med_geo_asistencia/config/constantes/llave_app_preferencia.dart';
 import 'package:med_geo_asistencia/features/domain/entities/export_entities.dart';
@@ -184,7 +185,9 @@ class ApiCliente extends DioServicio {
         "supId": dto.supId,
         "rutNombre": dto.rutNombre,
         "rutComentario": dto.rutComentario,
-        "rutFechaEjecucion": dto.rutFechaEjecucion.toIso8601String(),
+        "rutFechaEjecucion": DateFormat(
+          "yyyy-MM-dd HH:mm:ss",
+        ).format(dto.rutFechaEjecucion),
       };
 
       final response = await post(
@@ -290,7 +293,7 @@ class ApiCliente extends DioServicio {
   Future<List<Visita>> obtenerVisitaPorRuta(int rutId) async {
     try {
       final response = await get(
-        "Visita/obtenerVisitaPorRuta/$rutId",
+        "Visita/obtenerVisitasPorRuta/$rutId",
         options: Options(responseType: ResponseType.json),
       );
 

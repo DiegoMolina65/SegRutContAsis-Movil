@@ -37,10 +37,6 @@ final goRouterProvider = Provider((ref) {
       //   path: SettingScreen.nombreRuta,
       //   builder: (context, state) => const SettingScreen(),
       // ),
-      GoRoute(
-        path: PrincipalScreen.nombreRuta,
-        builder: (context, state) => const PrincipalScreen(),
-      ),
 
       // TODO: clientes
       GoRoute(
@@ -132,7 +128,7 @@ final goRouterProvider = Provider((ref) {
       if (authStatus == AutenticacionEstatus.autenticado) {
         if (isGoingTo == LoginScreen.nombreRuta) {
           /// Si no es las anteriores mandamos al menu principal
-          return VisitaPorRutaScreen.nombreRuta;
+          return AsistenciaEntradaScreen.nombreRuta;
         }
       }
 

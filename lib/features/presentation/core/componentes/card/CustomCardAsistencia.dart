@@ -20,11 +20,25 @@ class CustomCardAsistencia extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    // Verificar si la salida ocurrió en un día diferente al de la entrada
+    final salida = asistencia.asiHoraSalida;
+
     final isSameDay =
-        asistencia.asiHoraEntrada.day == asistencia.asiHoraSalida.day &&
-        asistencia.asiHoraEntrada.month == asistencia.asiHoraSalida.month &&
-        asistencia.asiHoraEntrada.year == asistencia.asiHoraSalida.year;
+        salida != null &&
+        asistencia.asiHoraEntrada.day == salida.day &&
+        asistencia.asiHoraEntrada.month == salida.month &&
+        asistencia.asiHoraEntrada.year == salida.year;
+
+    final String salidaTime = salida != null
+        ? _formatTime(salida)
+        : 'Pendiente'; // Muestra "Pendiente" si es null
+
+    final Color salidaColor = salida != null
+        ? Colors.red.shade700
+        : Colors.grey.shade600;
+
+    final String? salidaAdditionalInfo = salida != null && !isSameDay
+        ? ' (Día Siguiente)'
+        : null;
 
     return Card(
       elevation: 2,
@@ -41,7 +55,7 @@ class CustomCardAsistencia extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    asistencia.nombreVendedor,
+                    asistencia.nombreVendedor ?? "Cargando....",
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.primary,
@@ -72,10 +86,10 @@ class CustomCardAsistencia extends StatelessWidget {
               context,
               icon: Icons.logout_rounded,
               label: 'Salida',
-              time: _formatTime(asistencia.asiHoraSalida),
-              color: Colors.red.shade700,
-              // Indicador si la salida fue al día siguiente (por turnos nocturnos)
-              additionalInfo: !isSameDay ? ' (Día Siguiente)' : null,
+              time: salidaTime, // Usa la variable segura
+              color: salidaColor, // Usa el color seguro
+              // Indicador si la salida fue al día siguiente
+              additionalInfo: salidaAdditionalInfo, // Usa la variable segura
             ),
             const SizedBox(height: 12),
 
@@ -103,7 +117,7 @@ class CustomCardAsistencia extends StatelessWidget {
     );
   }
 
-  // Widget auxiliar para mostrar la hora de entrada/salida
+  // Widget auxiliar para mostrar la hora de entrada/salida (sin cambios)
   Widget _buildTimeRow(
     BuildContext context, {
     required IconData icon,
@@ -145,7 +159,7 @@ class CustomCardAsistencia extends StatelessWidget {
     );
   }
 
-  // Widget auxiliar para mostrar las coordenadas
+  // Widget auxiliar para mostrar las coordenadas (sin cambios)
   Widget _buildLocationRow(
     BuildContext context,
     IconData icon,

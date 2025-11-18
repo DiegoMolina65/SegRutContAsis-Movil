@@ -13,7 +13,7 @@ _Ruta _$RutaFromJson(Map<String, dynamic> json) => _Ruta(
   rutNombre: json['rutNombre'] as String,
   rutComentario: json['rutComentario'] as String,
   rutFechaEjecucion: DateTime.parse(json['rutFechaEjecucion'] as String),
-  nombreVendedor: json['nombreVendedor'] as String,
+  nombreVendedor: json['nombreVendedor'] as String?,
   nombreSupervisor: json['nombreSupervisor'] as String?,
 );
 

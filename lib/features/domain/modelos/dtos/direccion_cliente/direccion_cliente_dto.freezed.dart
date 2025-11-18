@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$DireccionClienteDto {
 
- int get dirClId; DateTime get dirClFechaCreacion; int get clId; int? get zonId; String? get dirClNombreSucursal; String get dirClDireccion; double get dirClLatitud; double get dirClLongitud; bool get dirClEstadoDel;
+ int get dirClId; DateTime get dirClFechaCreacion; int get clId; int? get zonId; String? get dirClNombreSucursal; String get dirClDireccion; double get dirClLatitud; double get dirClLongitud; bool get dirClEstadoDel; String? get nombreCliente; String? get nombreZona;
 /// Create a copy of DireccionClienteDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $DireccionClienteDtoCopyWith<DireccionClienteDto> get copyWith => _$DireccionCli
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is DireccionClienteDto&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.dirClFechaCreacion, dirClFechaCreacion) || other.dirClFechaCreacion == dirClFechaCreacion)&&(identical(other.clId, clId) || other.clId == clId)&&(identical(other.zonId, zonId) || other.zonId == zonId)&&(identical(other.dirClNombreSucursal, dirClNombreSucursal) || other.dirClNombreSucursal == dirClNombreSucursal)&&(identical(other.dirClDireccion, dirClDireccion) || other.dirClDireccion == dirClDireccion)&&(identical(other.dirClLatitud, dirClLatitud) || other.dirClLatitud == dirClLatitud)&&(identical(other.dirClLongitud, dirClLongitud) || other.dirClLongitud == dirClLongitud)&&(identical(other.dirClEstadoDel, dirClEstadoDel) || other.dirClEstadoDel == dirClEstadoDel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is DireccionClienteDto&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.dirClFechaCreacion, dirClFechaCreacion) || other.dirClFechaCreacion == dirClFechaCreacion)&&(identical(other.clId, clId) || other.clId == clId)&&(identical(other.zonId, zonId) || other.zonId == zonId)&&(identical(other.dirClNombreSucursal, dirClNombreSucursal) || other.dirClNombreSucursal == dirClNombreSucursal)&&(identical(other.dirClDireccion, dirClDireccion) || other.dirClDireccion == dirClDireccion)&&(identical(other.dirClLatitud, dirClLatitud) || other.dirClLatitud == dirClLatitud)&&(identical(other.dirClLongitud, dirClLongitud) || other.dirClLongitud == dirClLongitud)&&(identical(other.dirClEstadoDel, dirClEstadoDel) || other.dirClEstadoDel == dirClEstadoDel)&&(identical(other.nombreCliente, nombreCliente) || other.nombreCliente == nombreCliente)&&(identical(other.nombreZona, nombreZona) || other.nombreZona == nombreZona));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,dirClId,dirClFechaCreacion,clId,zonId,dirClNombreSucursal,dirClDireccion,dirClLatitud,dirClLongitud,dirClEstadoDel);
+int get hashCode => Object.hash(runtimeType,dirClId,dirClFechaCreacion,clId,zonId,dirClNombreSucursal,dirClDireccion,dirClLatitud,dirClLongitud,dirClEstadoDel,nombreCliente,nombreZona);
 
 @override
 String toString() {
-  return 'DireccionClienteDto(dirClId: $dirClId, dirClFechaCreacion: $dirClFechaCreacion, clId: $clId, zonId: $zonId, dirClNombreSucursal: $dirClNombreSucursal, dirClDireccion: $dirClDireccion, dirClLatitud: $dirClLatitud, dirClLongitud: $dirClLongitud, dirClEstadoDel: $dirClEstadoDel)';
+  return 'DireccionClienteDto(dirClId: $dirClId, dirClFechaCreacion: $dirClFechaCreacion, clId: $clId, zonId: $zonId, dirClNombreSucursal: $dirClNombreSucursal, dirClDireccion: $dirClDireccion, dirClLatitud: $dirClLatitud, dirClLongitud: $dirClLongitud, dirClEstadoDel: $dirClEstadoDel, nombreCliente: $nombreCliente, nombreZona: $nombreZona)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $DireccionClienteDtoCopyWith<$Res>  {
   factory $DireccionClienteDtoCopyWith(DireccionClienteDto value, $Res Function(DireccionClienteDto) _then) = _$DireccionClienteDtoCopyWithImpl;
 @useResult
 $Res call({
- int dirClId, DateTime dirClFechaCreacion, int clId, int? zonId, String? dirClNombreSucursal, String dirClDireccion, double dirClLatitud, double dirClLongitud, bool dirClEstadoDel
+ int dirClId, DateTime dirClFechaCreacion, int clId, int? zonId, String? dirClNombreSucursal, String dirClDireccion, double dirClLatitud, double dirClLongitud, bool dirClEstadoDel, String? nombreCliente, String? nombreZona
 });
 
 
@@ -65,7 +65,7 @@ class _$DireccionClienteDtoCopyWithImpl<$Res>
 
 /// Create a copy of DireccionClienteDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? dirClId = null,Object? dirClFechaCreacion = null,Object? clId = null,Object? zonId = freezed,Object? dirClNombreSucursal = freezed,Object? dirClDireccion = null,Object? dirClLatitud = null,Object? dirClLongitud = null,Object? dirClEstadoDel = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? dirClId = null,Object? dirClFechaCreacion = null,Object? clId = null,Object? zonId = freezed,Object? dirClNombreSucursal = freezed,Object? dirClDireccion = null,Object? dirClLatitud = null,Object? dirClLongitud = null,Object? dirClEstadoDel = null,Object? nombreCliente = freezed,Object? nombreZona = freezed,}) {
   return _then(_self.copyWith(
 dirClId: null == dirClId ? _self.dirClId : dirClId // ignore: cast_nullable_to_non_nullable
 as int,dirClFechaCreacion: null == dirClFechaCreacion ? _self.dirClFechaCreacion : dirClFechaCreacion // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,9 @@ as String?,dirClDireccion: null == dirClDireccion ? _self.dirClDireccion : dirCl
 as String,dirClLatitud: null == dirClLatitud ? _self.dirClLatitud : dirClLatitud // ignore: cast_nullable_to_non_nullable
 as double,dirClLongitud: null == dirClLongitud ? _self.dirClLongitud : dirClLongitud // ignore: cast_nullable_to_non_nullable
 as double,dirClEstadoDel: null == dirClEstadoDel ? _self.dirClEstadoDel : dirClEstadoDel // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,nombreCliente: freezed == nombreCliente ? _self.nombreCliente : nombreCliente // ignore: cast_nullable_to_non_nullable
+as String?,nombreZona: freezed == nombreZona ? _self.nombreZona : nombreZona // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -161,10 +163,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel,  String? nombreCliente,  String? nombreZona)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _DireccionClienteDto() when $default != null:
-return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel);case _:
+return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel,_that.nombreCliente,_that.nombreZona);case _:
   return orElse();
 
 }
@@ -182,10 +184,10 @@ return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel,  String? nombreCliente,  String? nombreZona)  $default,) {final _that = this;
 switch (_that) {
 case _DireccionClienteDto():
-return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel);case _:
+return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel,_that.nombreCliente,_that.nombreZona);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +204,10 @@ return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int dirClId,  DateTime dirClFechaCreacion,  int clId,  int? zonId,  String? dirClNombreSucursal,  String dirClDireccion,  double dirClLatitud,  double dirClLongitud,  bool dirClEstadoDel,  String? nombreCliente,  String? nombreZona)?  $default,) {final _that = this;
 switch (_that) {
 case _DireccionClienteDto() when $default != null:
-return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel);case _:
+return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_that.dirClNombreSucursal,_that.dirClDireccion,_that.dirClLatitud,_that.dirClLongitud,_that.dirClEstadoDel,_that.nombreCliente,_that.nombreZona);case _:
   return null;
 
 }
@@ -217,7 +219,7 @@ return $default(_that.dirClId,_that.dirClFechaCreacion,_that.clId,_that.zonId,_t
 @JsonSerializable()
 
 class _DireccionClienteDto implements DireccionClienteDto {
-  const _DireccionClienteDto({required this.dirClId, required this.dirClFechaCreacion, required this.clId, required this.zonId, required this.dirClNombreSucursal, required this.dirClDireccion, required this.dirClLatitud, required this.dirClLongitud, required this.dirClEstadoDel});
+  const _DireccionClienteDto({required this.dirClId, required this.dirClFechaCreacion, required this.clId, required this.zonId, required this.dirClNombreSucursal, required this.dirClDireccion, required this.dirClLatitud, required this.dirClLongitud, required this.dirClEstadoDel, required this.nombreCliente, required this.nombreZona});
   factory _DireccionClienteDto.fromJson(Map<String, dynamic> json) => _$DireccionClienteDtoFromJson(json);
 
 @override final  int dirClId;
@@ -229,6 +231,8 @@ class _DireccionClienteDto implements DireccionClienteDto {
 @override final  double dirClLatitud;
 @override final  double dirClLongitud;
 @override final  bool dirClEstadoDel;
+@override final  String? nombreCliente;
+@override final  String? nombreZona;
 
 /// Create a copy of DireccionClienteDto
 /// with the given fields replaced by the non-null parameter values.
@@ -243,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DireccionClienteDto&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.dirClFechaCreacion, dirClFechaCreacion) || other.dirClFechaCreacion == dirClFechaCreacion)&&(identical(other.clId, clId) || other.clId == clId)&&(identical(other.zonId, zonId) || other.zonId == zonId)&&(identical(other.dirClNombreSucursal, dirClNombreSucursal) || other.dirClNombreSucursal == dirClNombreSucursal)&&(identical(other.dirClDireccion, dirClDireccion) || other.dirClDireccion == dirClDireccion)&&(identical(other.dirClLatitud, dirClLatitud) || other.dirClLatitud == dirClLatitud)&&(identical(other.dirClLongitud, dirClLongitud) || other.dirClLongitud == dirClLongitud)&&(identical(other.dirClEstadoDel, dirClEstadoDel) || other.dirClEstadoDel == dirClEstadoDel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _DireccionClienteDto&&(identical(other.dirClId, dirClId) || other.dirClId == dirClId)&&(identical(other.dirClFechaCreacion, dirClFechaCreacion) || other.dirClFechaCreacion == dirClFechaCreacion)&&(identical(other.clId, clId) || other.clId == clId)&&(identical(other.zonId, zonId) || other.zonId == zonId)&&(identical(other.dirClNombreSucursal, dirClNombreSucursal) || other.dirClNombreSucursal == dirClNombreSucursal)&&(identical(other.dirClDireccion, dirClDireccion) || other.dirClDireccion == dirClDireccion)&&(identical(other.dirClLatitud, dirClLatitud) || other.dirClLatitud == dirClLatitud)&&(identical(other.dirClLongitud, dirClLongitud) || other.dirClLongitud == dirClLongitud)&&(identical(other.dirClEstadoDel, dirClEstadoDel) || other.dirClEstadoDel == dirClEstadoDel)&&(identical(other.nombreCliente, nombreCliente) || other.nombreCliente == nombreCliente)&&(identical(other.nombreZona, nombreZona) || other.nombreZona == nombreZona));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,dirClId,dirClFechaCreacion,clId,zonId,dirClNombreSucursal,dirClDireccion,dirClLatitud,dirClLongitud,dirClEstadoDel);
+int get hashCode => Object.hash(runtimeType,dirClId,dirClFechaCreacion,clId,zonId,dirClNombreSucursal,dirClDireccion,dirClLatitud,dirClLongitud,dirClEstadoDel,nombreCliente,nombreZona);
 
 @override
 String toString() {
-  return 'DireccionClienteDto(dirClId: $dirClId, dirClFechaCreacion: $dirClFechaCreacion, clId: $clId, zonId: $zonId, dirClNombreSucursal: $dirClNombreSucursal, dirClDireccion: $dirClDireccion, dirClLatitud: $dirClLatitud, dirClLongitud: $dirClLongitud, dirClEstadoDel: $dirClEstadoDel)';
+  return 'DireccionClienteDto(dirClId: $dirClId, dirClFechaCreacion: $dirClFechaCreacion, clId: $clId, zonId: $zonId, dirClNombreSucursal: $dirClNombreSucursal, dirClDireccion: $dirClDireccion, dirClLatitud: $dirClLatitud, dirClLongitud: $dirClLongitud, dirClEstadoDel: $dirClEstadoDel, nombreCliente: $nombreCliente, nombreZona: $nombreZona)';
 }
 
 
@@ -263,7 +267,7 @@ abstract mixin class _$DireccionClienteDtoCopyWith<$Res> implements $DireccionCl
   factory _$DireccionClienteDtoCopyWith(_DireccionClienteDto value, $Res Function(_DireccionClienteDto) _then) = __$DireccionClienteDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int dirClId, DateTime dirClFechaCreacion, int clId, int? zonId, String? dirClNombreSucursal, String dirClDireccion, double dirClLatitud, double dirClLongitud, bool dirClEstadoDel
+ int dirClId, DateTime dirClFechaCreacion, int clId, int? zonId, String? dirClNombreSucursal, String dirClDireccion, double dirClLatitud, double dirClLongitud, bool dirClEstadoDel, String? nombreCliente, String? nombreZona
 });
 
 
@@ -280,7 +284,7 @@ class __$DireccionClienteDtoCopyWithImpl<$Res>
 
 /// Create a copy of DireccionClienteDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? dirClId = null,Object? dirClFechaCreacion = null,Object? clId = null,Object? zonId = freezed,Object? dirClNombreSucursal = freezed,Object? dirClDireccion = null,Object? dirClLatitud = null,Object? dirClLongitud = null,Object? dirClEstadoDel = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? dirClId = null,Object? dirClFechaCreacion = null,Object? clId = null,Object? zonId = freezed,Object? dirClNombreSucursal = freezed,Object? dirClDireccion = null,Object? dirClLatitud = null,Object? dirClLongitud = null,Object? dirClEstadoDel = null,Object? nombreCliente = freezed,Object? nombreZona = freezed,}) {
   return _then(_DireccionClienteDto(
 dirClId: null == dirClId ? _self.dirClId : dirClId // ignore: cast_nullable_to_non_nullable
 as int,dirClFechaCreacion: null == dirClFechaCreacion ? _self.dirClFechaCreacion : dirClFechaCreacion // ignore: cast_nullable_to_non_nullable
@@ -291,7 +295,9 @@ as String?,dirClDireccion: null == dirClDireccion ? _self.dirClDireccion : dirCl
 as String,dirClLatitud: null == dirClLatitud ? _self.dirClLatitud : dirClLatitud // ignore: cast_nullable_to_non_nullable
 as double,dirClLongitud: null == dirClLongitud ? _self.dirClLongitud : dirClLongitud // ignore: cast_nullable_to_non_nullable
 as double,dirClEstadoDel: null == dirClEstadoDel ? _self.dirClEstadoDel : dirClEstadoDel // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,nombreCliente: freezed == nombreCliente ? _self.nombreCliente : nombreCliente // ignore: cast_nullable_to_non_nullable
+as String?,nombreZona: freezed == nombreZona ? _self.nombreZona : nombreZona // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

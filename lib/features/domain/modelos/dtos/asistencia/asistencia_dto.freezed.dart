@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AsistenciaDto {
 
- int get asiId; int get venId; DateTime get asiHoraEntrada; DateTime get asiHoraSalida; double get asiLatitud; double get asiLongitud; String get nombreVendedor;
+ int get asiId; int get venId; DateTime get asiHoraEntrada; DateTime? get asiHoraSalida; double get asiLatitud; double get asiLongitud; String? get nombreVendedor;
 /// Create a copy of AsistenciaDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $AsistenciaDtoCopyWith<$Res>  {
   factory $AsistenciaDtoCopyWith(AsistenciaDto value, $Res Function(AsistenciaDto) _then) = _$AsistenciaDtoCopyWithImpl;
 @useResult
 $Res call({
- int asiId, int venId, DateTime asiHoraEntrada, DateTime asiHoraSalida, double asiLatitud, double asiLongitud, String nombreVendedor
+ int asiId, int venId, DateTime asiHoraEntrada, DateTime? asiHoraSalida, double asiLatitud, double asiLongitud, String? nombreVendedor
 });
 
 
@@ -65,16 +65,16 @@ class _$AsistenciaDtoCopyWithImpl<$Res>
 
 /// Create a copy of AsistenciaDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? asiId = null,Object? venId = null,Object? asiHoraEntrada = null,Object? asiHoraSalida = null,Object? asiLatitud = null,Object? asiLongitud = null,Object? nombreVendedor = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? asiId = null,Object? venId = null,Object? asiHoraEntrada = null,Object? asiHoraSalida = freezed,Object? asiLatitud = null,Object? asiLongitud = null,Object? nombreVendedor = freezed,}) {
   return _then(_self.copyWith(
 asiId: null == asiId ? _self.asiId : asiId // ignore: cast_nullable_to_non_nullable
 as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
 as int,asiHoraEntrada: null == asiHoraEntrada ? _self.asiHoraEntrada : asiHoraEntrada // ignore: cast_nullable_to_non_nullable
-as DateTime,asiHoraSalida: null == asiHoraSalida ? _self.asiHoraSalida : asiHoraSalida // ignore: cast_nullable_to_non_nullable
-as DateTime,asiLatitud: null == asiLatitud ? _self.asiLatitud : asiLatitud // ignore: cast_nullable_to_non_nullable
+as DateTime,asiHoraSalida: freezed == asiHoraSalida ? _self.asiHoraSalida : asiHoraSalida // ignore: cast_nullable_to_non_nullable
+as DateTime?,asiLatitud: null == asiLatitud ? _self.asiLatitud : asiLatitud // ignore: cast_nullable_to_non_nullable
 as double,asiLongitud: null == asiLongitud ? _self.asiLongitud : asiLongitud // ignore: cast_nullable_to_non_nullable
-as double,nombreVendedor: null == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
-as String,
+as double,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime asiHoraSalida,  double asiLatitud,  double asiLongitud,  String nombreVendedor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime? asiHoraSalida,  double asiLatitud,  double asiLongitud,  String? nombreVendedor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AsistenciaDto() when $default != null:
 return $default(_that.asiId,_that.venId,_that.asiHoraEntrada,_that.asiHoraSalida,_that.asiLatitud,_that.asiLongitud,_that.nombreVendedor);case _:
@@ -180,7 +180,7 @@ return $default(_that.asiId,_that.venId,_that.asiHoraEntrada,_that.asiHoraSalida
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime asiHoraSalida,  double asiLatitud,  double asiLongitud,  String nombreVendedor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime? asiHoraSalida,  double asiLatitud,  double asiLongitud,  String? nombreVendedor)  $default,) {final _that = this;
 switch (_that) {
 case _AsistenciaDto():
 return $default(_that.asiId,_that.venId,_that.asiHoraEntrada,_that.asiHoraSalida,_that.asiLatitud,_that.asiLongitud,_that.nombreVendedor);case _:
@@ -200,7 +200,7 @@ return $default(_that.asiId,_that.venId,_that.asiHoraEntrada,_that.asiHoraSalida
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime asiHoraSalida,  double asiLatitud,  double asiLongitud,  String nombreVendedor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int asiId,  int venId,  DateTime asiHoraEntrada,  DateTime? asiHoraSalida,  double asiLatitud,  double asiLongitud,  String? nombreVendedor)?  $default,) {final _that = this;
 switch (_that) {
 case _AsistenciaDto() when $default != null:
 return $default(_that.asiId,_that.venId,_that.asiHoraEntrada,_that.asiHoraSalida,_that.asiLatitud,_that.asiLongitud,_that.nombreVendedor);case _:
@@ -221,10 +221,10 @@ class _AsistenciaDto implements AsistenciaDto {
 @override final  int asiId;
 @override final  int venId;
 @override final  DateTime asiHoraEntrada;
-@override final  DateTime asiHoraSalida;
+@override final  DateTime? asiHoraSalida;
 @override final  double asiLatitud;
 @override final  double asiLongitud;
-@override final  String nombreVendedor;
+@override final  String? nombreVendedor;
 
 /// Create a copy of AsistenciaDto
 /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +259,7 @@ abstract mixin class _$AsistenciaDtoCopyWith<$Res> implements $AsistenciaDtoCopy
   factory _$AsistenciaDtoCopyWith(_AsistenciaDto value, $Res Function(_AsistenciaDto) _then) = __$AsistenciaDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int asiId, int venId, DateTime asiHoraEntrada, DateTime asiHoraSalida, double asiLatitud, double asiLongitud, String nombreVendedor
+ int asiId, int venId, DateTime asiHoraEntrada, DateTime? asiHoraSalida, double asiLatitud, double asiLongitud, String? nombreVendedor
 });
 
 
@@ -276,16 +276,16 @@ class __$AsistenciaDtoCopyWithImpl<$Res>
 
 /// Create a copy of AsistenciaDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? asiId = null,Object? venId = null,Object? asiHoraEntrada = null,Object? asiHoraSalida = null,Object? asiLatitud = null,Object? asiLongitud = null,Object? nombreVendedor = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? asiId = null,Object? venId = null,Object? asiHoraEntrada = null,Object? asiHoraSalida = freezed,Object? asiLatitud = null,Object? asiLongitud = null,Object? nombreVendedor = freezed,}) {
   return _then(_AsistenciaDto(
 asiId: null == asiId ? _self.asiId : asiId // ignore: cast_nullable_to_non_nullable
 as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
 as int,asiHoraEntrada: null == asiHoraEntrada ? _self.asiHoraEntrada : asiHoraEntrada // ignore: cast_nullable_to_non_nullable
-as DateTime,asiHoraSalida: null == asiHoraSalida ? _self.asiHoraSalida : asiHoraSalida // ignore: cast_nullable_to_non_nullable
-as DateTime,asiLatitud: null == asiLatitud ? _self.asiLatitud : asiLatitud // ignore: cast_nullable_to_non_nullable
+as DateTime,asiHoraSalida: freezed == asiHoraSalida ? _self.asiHoraSalida : asiHoraSalida // ignore: cast_nullable_to_non_nullable
+as DateTime?,asiLatitud: null == asiLatitud ? _self.asiLatitud : asiLatitud // ignore: cast_nullable_to_non_nullable
 as double,asiLongitud: null == asiLongitud ? _self.asiLongitud : asiLongitud // ignore: cast_nullable_to_non_nullable
-as double,nombreVendedor: null == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
-as String,
+as double,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

@@ -80,19 +80,13 @@ class ListaRutaView extends ConsumerWidget {
         if (next.datosExtras is int) {
           final rutId = next.datosExtras as int;
 
-          // Lógica de Edición
-          if (rutId > 0) {
-            await Navigator.of(
-              context,
-            ).pushNamed(CrearRutaScreen.nombreRuta, arguments: rutId);
-            notificador.obtenerRutas();
+          if (next.mensaje == "Navegar a lista de visitas" && rutId > 0) {
+            context.push('${VisitaPorRutaScreen.nombreRuta}/$rutId');
           }
-          // Lógica de Visitas
-          else if (next.titulo == "Navegar a lista de visitas") {
-            if (rutId > 0) {
-              // Usamos context.push para GoRouter
-              context.push('${VisitaPorRutaScreen.nombreRuta}/$rutId');
-            }
+          // Lógica de Edición
+          else if (next.mensaje == "Navegar a edición de ruta" && rutId > 0) {
+            await context.push('${CrearRutaScreen.nombreRuta}/$rutId');
+            notificador.obtenerRutas();
           }
         }
       }

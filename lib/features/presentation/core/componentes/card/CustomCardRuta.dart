@@ -199,7 +199,7 @@ class CustomCardRuta extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              ruta.nombreVendedor,
+                              ruta.nombreVendedor ?? "Cargando...",
                               style: TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,

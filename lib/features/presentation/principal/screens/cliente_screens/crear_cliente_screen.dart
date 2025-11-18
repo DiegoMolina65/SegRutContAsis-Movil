@@ -118,7 +118,7 @@ class _CrearClienteViewState extends ConsumerState<CrearClienteView> {
               ),
               const SizedBox(height: 8),
               CustomTextFormField(
-                hintText: "Ej: Mayorista, Minorista",
+                hintText: "Ej: Doctor, Doctora, Especialidad",
                 onChanged: (val) => ref
                     .read(crearClienteScreenProvider.notifier)
                     .onCambioClTipoCliente(val),

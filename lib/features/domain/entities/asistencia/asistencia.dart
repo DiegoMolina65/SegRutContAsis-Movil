@@ -9,10 +9,10 @@ abstract class Asistencia with _$Asistencia {
     required int asiId,
     required int venId,
     required DateTime asiHoraEntrada,
-    required DateTime asiHoraSalida,
+    required DateTime? asiHoraSalida,
     required double asiLatitud,
     required double asiLongitud,
-    required String nombreVendedor,
+    required String? nombreVendedor,
   }) = _Asistencia;
   factory Asistencia.fromJson(Map<String, Object?> json) =>
       _$AsistenciaFromJson(json);

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$RutaDto {
 
- int get rutId; int get venId; int get supId; String get rutNombre; String get rutComentario; DateTime get rutFechaEjecucion; String get nombreVendedor; String? get nombreSupervisor;
+ int get rutId; int get venId; int get supId; String get rutNombre; String get rutComentario; DateTime get rutFechaEjecucion; String? get nombreVendedor; String? get nombreSupervisor;
 /// Create a copy of RutaDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $RutaDtoCopyWith<$Res>  {
   factory $RutaDtoCopyWith(RutaDto value, $Res Function(RutaDto) _then) = _$RutaDtoCopyWithImpl;
 @useResult
 $Res call({
- int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime rutFechaEjecucion, String nombreVendedor, String? nombreSupervisor
+ int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime rutFechaEjecucion, String? nombreVendedor, String? nombreSupervisor
 });
 
 
@@ -65,7 +65,7 @@ class _$RutaDtoCopyWithImpl<$Res>
 
 /// Create a copy of RutaDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = null,Object? nombreVendedor = null,Object? nombreSupervisor = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = null,Object? nombreVendedor = freezed,Object? nombreSupervisor = freezed,}) {
   return _then(_self.copyWith(
 rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
 as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
@@ -73,8 +73,8 @@ as int,supId: null == supId ? _self.supId : supId // ignore: cast_nullable_to_no
 as int,rutNombre: null == rutNombre ? _self.rutNombre : rutNombre // ignore: cast_nullable_to_non_nullable
 as String,rutComentario: null == rutComentario ? _self.rutComentario : rutComentario // ignore: cast_nullable_to_non_nullable
 as String,rutFechaEjecucion: null == rutFechaEjecucion ? _self.rutFechaEjecucion : rutFechaEjecucion // ignore: cast_nullable_to_non_nullable
-as DateTime,nombreVendedor: null == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
-as String,nombreSupervisor: freezed == nombreSupervisor ? _self.nombreSupervisor : nombreSupervisor // ignore: cast_nullable_to_non_nullable
+as DateTime,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as String?,nombreSupervisor: freezed == nombreSupervisor ? _self.nombreSupervisor : nombreSupervisor // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -160,7 +160,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String nombreVendedor,  String? nombreSupervisor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String? nombreVendedor,  String? nombreSupervisor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _RutaDto() when $default != null:
 return $default(_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.nombreVendedor,_that.nombreSupervisor);case _:
@@ -181,7 +181,7 @@ return $default(_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutCom
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String nombreVendedor,  String? nombreSupervisor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String? nombreVendedor,  String? nombreSupervisor)  $default,) {final _that = this;
 switch (_that) {
 case _RutaDto():
 return $default(_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.nombreVendedor,_that.nombreSupervisor);case _:
@@ -201,7 +201,7 @@ return $default(_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutCom
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String nombreVendedor,  String? nombreSupervisor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int rutId,  int venId,  int supId,  String rutNombre,  String rutComentario,  DateTime rutFechaEjecucion,  String? nombreVendedor,  String? nombreSupervisor)?  $default,) {final _that = this;
 switch (_that) {
 case _RutaDto() when $default != null:
 return $default(_that.rutId,_that.venId,_that.supId,_that.rutNombre,_that.rutComentario,_that.rutFechaEjecucion,_that.nombreVendedor,_that.nombreSupervisor);case _:
@@ -225,7 +225,7 @@ class _RutaDto implements RutaDto {
 @override final  String rutNombre;
 @override final  String rutComentario;
 @override final  DateTime rutFechaEjecucion;
-@override final  String nombreVendedor;
+@override final  String? nombreVendedor;
 @override final  String? nombreSupervisor;
 
 /// Create a copy of RutaDto
@@ -261,7 +261,7 @@ abstract mixin class _$RutaDtoCopyWith<$Res> implements $RutaDtoCopyWith<$Res> {
   factory _$RutaDtoCopyWith(_RutaDto value, $Res Function(_RutaDto) _then) = __$RutaDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime rutFechaEjecucion, String nombreVendedor, String? nombreSupervisor
+ int rutId, int venId, int supId, String rutNombre, String rutComentario, DateTime rutFechaEjecucion, String? nombreVendedor, String? nombreSupervisor
 });
 
 
@@ -278,7 +278,7 @@ class __$RutaDtoCopyWithImpl<$Res>
 
 /// Create a copy of RutaDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = null,Object? nombreVendedor = null,Object? nombreSupervisor = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? rutId = null,Object? venId = null,Object? supId = null,Object? rutNombre = null,Object? rutComentario = null,Object? rutFechaEjecucion = null,Object? nombreVendedor = freezed,Object? nombreSupervisor = freezed,}) {
   return _then(_RutaDto(
 rutId: null == rutId ? _self.rutId : rutId // ignore: cast_nullable_to_non_nullable
 as int,venId: null == venId ? _self.venId : venId // ignore: cast_nullable_to_non_nullable
@@ -286,8 +286,8 @@ as int,supId: null == supId ? _self.supId : supId // ignore: cast_nullable_to_no
 as int,rutNombre: null == rutNombre ? _self.rutNombre : rutNombre // ignore: cast_nullable_to_non_nullable
 as String,rutComentario: null == rutComentario ? _self.rutComentario : rutComentario // ignore: cast_nullable_to_non_nullable
 as String,rutFechaEjecucion: null == rutFechaEjecucion ? _self.rutFechaEjecucion : rutFechaEjecucion // ignore: cast_nullable_to_non_nullable
-as DateTime,nombreVendedor: null == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
-as String,nombreSupervisor: freezed == nombreSupervisor ? _self.nombreSupervisor : nombreSupervisor // ignore: cast_nullable_to_non_nullable
+as DateTime,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as String?,nombreSupervisor: freezed == nombreSupervisor ? _self.nombreSupervisor : nombreSupervisor // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

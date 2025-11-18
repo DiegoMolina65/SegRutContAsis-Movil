@@ -14,6 +14,8 @@ class DireccionClienteMapper {
         dirClLatitud: dto.dirClLatitud,
         dirClLongitud: dto.dirClLongitud,
         dirClEstadoDel: dto.dirClEstadoDel,
+        nombreCliente: dto.nombreCliente,
+        nombreZona: dto.nombreZona,
       );
 
   // Entidad > DTO
@@ -28,5 +30,7 @@ class DireccionClienteMapper {
         dirClLatitud: entity.dirClLatitud,
         dirClLongitud: entity.dirClLongitud,
         dirClEstadoDel: entity.dirClEstadoDel,
+        nombreCliente: entity.nombreCliente,
+        nombreZona: entity.nombreZona,
       );
 }

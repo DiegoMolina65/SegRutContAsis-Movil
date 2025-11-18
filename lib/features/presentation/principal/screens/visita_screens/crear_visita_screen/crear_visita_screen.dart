@@ -41,13 +41,15 @@ class CrearVisitaView extends ConsumerStatefulWidget {
 class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
   final _formKey = GlobalKey<FormState>();
 
+  Key _formWidgetKey = UniqueKey();
+
   void _validarYCrearVisita() {
     if (_formKey.currentState!.validate()) {
       final notificador = ref.read(
         crearVisitaScreenProvider(widget.visId).notifier,
       );
 
-      notificador.onCrearVisita().ejecutarConLoading();
+      notificador.onGuardarVisita().ejecutarConLoading();
     }
   }
 
@@ -73,7 +75,10 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
         if (next != null) {
           DialogoMensajeUI(mensajeUI: next).show(context);
           if (!esEdicion) {
-            _formKey.currentState?.reset();
+            notificador.onResetearFormulario();
+            setState(() {
+              _formWidgetKey = UniqueKey();
+            });
           }
         }
       },
@@ -103,148 +108,154 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
             return Form(
               key: _formKey,
               autovalidateMode: AutovalidateMode.onUserInteraction,
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      // SELECCIONAR RUTA
-                      const CustomText.etiqueta(
-                        "Ruta asignada:",
-                        color: Colors.black,
-                      ),
-                      const SizedBox(height: 8),
-                      FormField<int>(
-                        initialValue: estado.rutId == 0 ? null : estado.rutId,
-                        validator: (value) => (value == null || value == 0)
-                            ? "La ruta es requerida"
-                            : null,
-                        builder: (FormFieldState<int> field) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomSelectCustom<int>(
-                                items: ruta.map((e) => e.rutId).toList(),
-                                itemLabel: (id) => ruta
-                                    .firstWhere((e) => e.rutId == id)
-                                    .rutNombre,
-                                value: field.value,
-                                onChanged: (value) {
-                                  field.didChange(value);
-                                  notificador.onCambioRutId(value ?? 0);
-                                },
-                                prefixIcon: const Icon(Icons.route),
-                                permitirNinguno: false,
-                              ),
-                              if (field.hasError)
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 12,
-                                    top: 8,
-                                  ),
-                                  child: Text(
-                                    field.errorText!,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.error,
-                                      fontSize: 12,
+              child: KeyedSubtree(
+                key: _formWidgetKey,
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // SELECCIONAR RUTA
+                        const CustomText.etiqueta(
+                          "Ruta asignada:",
+                          color: Colors.black,
+                        ),
+                        const SizedBox(height: 8),
+                        FormField<int>(
+                          initialValue: estado.rutId == 0 ? null : estado.rutId,
+                          validator: (value) => (value == null || value == 0)
+                              ? "La ruta es requerida"
+                              : null,
+                          builder: (FormFieldState<int> field) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomSelectCustom<int>(
+                                  items: ruta.map((e) => e.rutId).toList(),
+                                  itemLabel: (id) => ruta
+                                      .firstWhere((e) => e.rutId == id)
+                                      .rutNombre,
+                                  value: field.value,
+                                  onChanged: (value) {
+                                    field.didChange(value);
+                                    notificador.onCambioRutId(value ?? 0);
+                                  },
+                                  prefixIcon: const Icon(Icons.route),
+                                  permitirNinguno: false,
+                                ),
+                                if (field.hasError)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 12,
+                                      top: 8,
+                                    ),
+                                    child: Text(
+                                      field.errorText!,
+                                      style: TextStyle(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.error,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                              ],
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 16),
 
-                      // SELECCIONAR DIRECCIÓN CLIENTE
-                      const CustomText.etiqueta(
-                        "Dirección del cliente:",
-                        color: Colors.black,
-                      ),
-                      const SizedBox(height: 8),
-                      FormField<int>(
-                        initialValue: estado.dirClId == 0
-                            ? null
-                            : estado.dirClId,
-                        validator: (value) => (value == null || value == 0)
-                            ? "La dirección del cliente es requerida"
-                            : null,
-                        builder: (FormFieldState<int> field) {
-                          return Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              CustomSelectCustom<int>(
-                                items: direcciones
-                                    .map((e) => e.dirClId)
-                                    .toList(),
-                                itemLabel: (id) => direcciones
-                                    .firstWhere((e) => e.dirClId == id)
-                                    .dirClDireccion,
-                                value: field.value,
-                                onChanged: (value) {
-                                  field.didChange(value);
-                                  notificador.onCambioDirClId(value ?? 0);
-                                },
-                                prefixIcon: const Icon(Icons.location_on),
-                                permitirNinguno: false,
-                              ),
-                              if (field.hasError)
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                    left: 12,
-                                    top: 8,
-                                  ),
-                                  child: Text(
-                                    field.errorText!,
-                                    style: TextStyle(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.error,
-                                      fontSize: 12,
+                        // SELECCIONAR DIRECCIÓN CLIENTE
+                        const CustomText.etiqueta(
+                          "Dirección del cliente:",
+                          color: Colors.black,
+                        ),
+                        const SizedBox(height: 8),
+                        FormField<int>(
+                          initialValue: estado.dirClId == 0
+                              ? null
+                              : estado.dirClId,
+                          validator: (value) => (value == null || value == 0)
+                              ? "La dirección del cliente es requerida"
+                              : null,
+                          builder: (FormFieldState<int> field) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                CustomSelectCustom<int>(
+                                  items: direcciones
+                                      .map((e) => e.dirClId)
+                                      .toList(),
+                                  itemLabel: (id) {
+                                    final direccion = direcciones.firstWhere(
+                                      (e) => e.dirClId == id,
+                                    );
+                                    return '${direccion.dirClNombreSucursal} - ${direccion.dirClDireccion} - ${direccion.nombreCliente}';
+                                  },
+                                  value: field.value,
+                                  onChanged: (value) {
+                                    field.didChange(value);
+                                    notificador.onCambioDirClId(value ?? 0);
+                                  },
+                                  prefixIcon: const Icon(Icons.location_on),
+                                  permitirNinguno: false,
+                                ),
+                                if (field.hasError)
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                      left: 12,
+                                      top: 8,
+                                    ),
+                                    child: Text(
+                                      field.errorText!,
+                                      style: TextStyle(
+                                        color: Theme.of(
+                                          context,
+                                        ).colorScheme.error,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 16),
+                              ],
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 16),
 
-                      // COMENTARIO
-                      const CustomText.etiqueta(
-                        "Comentario de la visita:",
-                        color: Colors.black,
-                      ),
-                      const SizedBox(height: 8),
-                      CustomTexFormFiledComentarios(
-                        initialValue: estado.visComentario,
-                        labelText: "Comentario",
-                        hintText: "Agrega observaciones sobre la visita...",
-                        onChanged: notificador.onCambioVisComentario,
-                        minLines: 3,
-                        maxLines: 6,
-                        maxLength: 1000,
-                        helperText: "Información adicional de la visita",
-                        requerido: true,
-                        mensajeValidacion: "El comentario es requerido",
-                      ),
-                      const SizedBox(height: 24),
+                        // COMENTARIO
+                        const CustomText.etiqueta(
+                          "Comentario de la visita:",
+                          color: Colors.black,
+                        ),
+                        const SizedBox(height: 8),
+                        CustomTexFormFiledComentarios(
+                          initialValue: estado.visComentario,
+                          labelText: "Comentario",
+                          hintText: "Agrega observaciones sobre la visita...",
+                          onChanged: notificador.onCambioVisComentario,
+                          minLines: 3,
+                          maxLines: 6,
+                          maxLength: 1000,
+                          helperText: "Información adicional de la visita",
+                          requerido: true,
+                          mensajeValidacion: "El comentario es requerido",
+                        ),
+                        const SizedBox(height: 24),
 
-                      // BOTÓN DE CREACIÓN / EDICIÓN
-                      CustomElevatedButton(
-                        etiqueta: esEdicion
-                            ? "Guardar Cambios"
-                            : "Crear Visita",
-                        icono: esEdicion
-                            ? Icons.save
-                            : Icons.check_circle_outline,
-                        onClick: _validarYCrearVisita,
-                        expandir: true,
-                      ),
-                    ],
+                        // BOTÓN DE CREACIÓN / EDICIÓN
+                        CustomElevatedButton(
+                          etiqueta: esEdicion
+                              ? "Guardar Cambios"
+                              : "Crear Visita",
+                          icono: esEdicion
+                              ? Icons.save
+                              : Icons.check_circle_outline,
+                          onClick: _validarYCrearVisita,
+                          expandir: true,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

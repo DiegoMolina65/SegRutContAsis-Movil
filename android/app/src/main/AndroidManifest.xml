@@ -7,6 +7,11 @@
         android:label="med_geo_asistencia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBL2RkQpTfqRzTx3Nfe058XWQTRHV3F5so"/>
+            
         <activity
             android:name=".MainActivity"
             android:exported="true"

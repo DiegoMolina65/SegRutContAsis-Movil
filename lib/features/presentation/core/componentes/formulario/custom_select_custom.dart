@@ -66,20 +66,64 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
 
   @override
   void dispose() {
-    _cerrarDropdown();
+    _searchController.removeListener(_filtrarItems);
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry?.dispose();
+      _overlayEntry = null;
+    }
     _searchController.dispose();
     _searchFocus.dispose();
     super.dispose();
   }
 
+  @override
+  void deactivate() {
+    _searchController.removeListener(_filtrarItems);
+    _searchController.clear();
+    _searchController.addListener(_filtrarItems);
+
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry?.dispose();
+      _overlayEntry = null;
+    }
+
+    _isOpen = false;
+    super.deactivate();
+  }
+
+  void _cerrarDropdown() {
+    if (_overlayEntry != null) {
+      _overlayEntry?.remove();
+      _overlayEntry?.dispose();
+      _overlayEntry = null;
+    }
+    _searchController.clear();
+
+    if (mounted) {
+      setState(() => _isOpen = false);
+    }
+  }
+
   void _filtrarItems() {
+    if (!mounted) return;
+
     final query = _searchController.text.toLowerCase();
+
     setState(() {
       _itemsFiltrados = widget.items
           .where((item) => widget.itemLabel(item).toLowerCase().contains(query))
           .toList();
     });
-    _overlayEntry?.markNeedsBuild();
+
+    if (_overlayEntry?.mounted ?? false) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (_overlayEntry?.mounted ?? false) {
+          _overlayEntry?.markNeedsBuild();
+        }
+      });
+    }
   }
 
   void _toggleDropdown() {
@@ -91,19 +135,17 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
   }
 
   void _abrirDropdown() {
+    if (!mounted) return;
+
     _overlayEntry = _crearOverlayEntry();
     Overlay.of(context).insert(_overlayEntry!);
-    setState(() => _isOpen = true);
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _searchFocus.requestFocus();
-    });
-  }
 
-  void _cerrarDropdown() {
-    _overlayEntry?.remove();
-    _overlayEntry = null;
-    _searchController.clear();
-    setState(() => _isOpen = false);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) {
+        setState(() => _isOpen = true);
+        _searchFocus.requestFocus();
+      }
+    });
   }
 
   void _seleccionarItem(T? item) {
@@ -113,14 +155,14 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
   }
 
   void _validar(T? value) {
+    if (!mounted) return;
+
     setState(() {
-      // Si hay un validator personalizado, úsalo
       if (widget.validator != null) {
         _errorText = widget.validator!(value);
         return;
       }
 
-      // Si el campo es requerido, valida que no sea null
       if (widget.requerido) {
         if (value == null) {
           _errorText = widget.mensajeValidacion ?? 'Este campo es requerido';
@@ -179,7 +221,9 @@ class _CustomSelectCustomState<T> extends State<CustomSelectCustom<T>> {
                                       icon: const Icon(Icons.clear, size: 20),
                                       onPressed: () {
                                         _searchController.clear();
-                                        _searchFocus.requestFocus();
+                                        if (mounted) {
+                                          _searchFocus.requestFocus();
+                                        }
                                       },
                                     )
                                   : null,

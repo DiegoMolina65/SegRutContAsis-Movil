@@ -12,7 +12,7 @@ abstract class RutaDto with _$RutaDto {
     required String rutNombre,
     required String rutComentario,
     required DateTime rutFechaEjecucion,
-    required String nombreVendedor,
+    required String? nombreVendedor,
     required String? nombreSupervisor,
   }) = _RutaDto;
   factory RutaDto.fromJson(Map<String, Object?> json) =>

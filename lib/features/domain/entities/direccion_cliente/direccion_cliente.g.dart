@@ -17,6 +17,8 @@ _DireccionCliente _$DireccionClienteFromJson(Map<String, dynamic> json) =>
       dirClLatitud: (json['dirClLatitud'] as num).toDouble(),
       dirClLongitud: (json['dirClLongitud'] as num).toDouble(),
       dirClEstadoDel: json['dirClEstadoDel'] as bool,
+      nombreCliente: json['nombreCliente'] as String?,
+      nombreZona: json['nombreZona'] as String?,
     );
 
 Map<String, dynamic> _$DireccionClienteToJson(_DireccionCliente instance) =>
@@ -30,4 +32,6 @@ Map<String, dynamic> _$DireccionClienteToJson(_DireccionCliente instance) =>
       'dirClLatitud': instance.dirClLatitud,
       'dirClLongitud': instance.dirClLongitud,
       'dirClEstadoDel': instance.dirClEstadoDel,
+      'nombreCliente': instance.nombreCliente,
+      'nombreZona': instance.nombreZona,
     };
