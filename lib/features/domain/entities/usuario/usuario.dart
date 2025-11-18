@@ -6,9 +6,10 @@ part 'usuario.g.dart';
 
 @freezed
 abstract class Usuario with _$Usuario {
+  const Usuario._();
+
   const factory Usuario({
     required int usrId,
-    @Default("") token,
     required String usrNombreCompleto,
     required String? usrCorreo,
     required String? usrTelefono,
@@ -16,14 +17,30 @@ abstract class Usuario with _$Usuario {
     required String? usrCarnetIdentidad,
     required String? usrUsuarioLog,
     required String? usrContrasenaLog,
-    required bool usrEstadoDel,
-    required List<Role> roles,
-    required int? vendedorId,
-    required int? supervisorId,
-    required bool esAdministrador,
-    required bool esSupervisor,
-    required bool esVendedor,
+    @Default("") token,
+    @Default(true) bool usrEstadoDel,
+    @Default([]) List<Role> roles,
+    @Default(null) int? vendedorId,
+    @Default(null) int? supervisorId,
+    @Default(false) bool esAdministrador,
+    @Default(false) bool esSupervisor,
+    @Default(false) bool esVendedor,
   }) = _Usuario;
+
+  /// Constructor necesario por nombre de atributos para integrar a la tabla drift
+  factory Usuario.desdeBaseDeDatos({
+    required int id,
+    required String nombre_completo,
+    required String? correo,
+    required String? telefono,
+    required String? nit,
+    required String? ci,
+    required String? alias,
+    required String? contrasenia,
+  }) {
+   return Usuario(usrId: id, usrNombreCompleto: nombre_completo, usrCorreo: correo, usrTelefono: telefono, usrNitEmpleado: nit, usrCarnetIdentidad: ci, usrUsuarioLog: alias, usrContrasenaLog: contrasenia);
+  }
+
   factory Usuario.fromJson(Map<String, Object?> json) =>
       _$UsuarioFromJson(json);
 }

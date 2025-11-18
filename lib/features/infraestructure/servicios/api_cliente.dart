@@ -10,6 +10,7 @@ import 'package:med_geo_asistencia/features/infraestructure/mappers/asistencia_m
 import 'package:med_geo_asistencia/features/infraestructure/mappers/cliente_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/direccion_cliente_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/ruta_mapper.dart';
+import 'package:med_geo_asistencia/features/infraestructure/mappers/seguimiento_vendedor_mapper.dart';
 
 import 'package:med_geo_asistencia/features/infraestructure/mappers/usuario_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/visita_mapper.dart';
@@ -507,4 +508,32 @@ class ApiCliente extends DioServicio {
       throw Exception("Error al obtener asistencias: $e");
     }
   }
+
+  // TODO: Servicios seguimiento de vendedor
+  Future<SeguimientoVendedor> crearSeguimientoVendedor(SeguimientoVendedor entidad) async {
+    try {
+      final dto = SeguimientoVendedorMapper.obtenerDto(entidad);
+
+      final response = await post(
+        "SeguimientoVendedor/crearSeguimientoVendedor",
+        data: dto.toJson(),
+
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+          responseType: ResponseType.json,
+          sendTimeout: Duration(seconds: 3),
+
+        ),
+      );
+
+      final json = response.data is String
+          ? jsonDecode(response.data)
+          : response.data;
+
+      return SeguimientoVendedorMapper.obtenerEntidad(SeguimientoVendedorDto.fromJson(json));
+    } catch (e) {
+      throw Exception("Error al crear cliente: $e");
+    }
+  }
+
 }
