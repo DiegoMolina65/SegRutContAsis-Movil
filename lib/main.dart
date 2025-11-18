@@ -1,11 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart';
+import 'package:flutter_background_geolocation/flutter_background_geolocation.dart' as bg;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:med_geo_asistencia/config/constantes/constantes.dart';
 import 'package:med_geo_asistencia/config/constantes/environment.dart';
 import 'package:med_geo_asistencia/config/router/app_router.dart';
+import 'package:med_geo_asistencia/features/domain/entities/export_entities.dart';
+import 'package:med_geo_asistencia/features/domain/repositories/seguimiento_vendedor_repository.dart';
+import 'package:med_geo_asistencia/features/infraestructure/contratos/seguimiento_vendedor/repositories/seguimiento_vendedor_repository_impl.dart';
+import 'package:med_geo_asistencia/features/presentation/core/componentes/config_puglins/config_rastreo_gps.dart';
 import 'package:overlay_kit/overlay_kit.dart';
+
+@pragma('vm:entry-point')
+void headlessTask(bg.HeadlessEvent headlessEvent) async {
+  print('[BackgroundGeolocation HeadlessTask]: $headlessEvent');
+  // Implement a 'case' for only those events you're interested in.
+  switch(headlessEvent.name) {
+    case bg.Event.TERMINATE:
+      bg.State state = headlessEvent.event;
+      print('Debug BackgroundGeolocation - State: $state');
+      break;
+    case bg.Event.HEARTBEAT:
+      bg.HeartbeatEvent event = headlessEvent.event;
+      print('Debug BackgroundGeolocation - HeartbeatEvent: $event');
+      break;
+    case bg.Event.LOCATION:
+      bg.Location location = headlessEvent.event;
+      try {
+        print('Debug BackgroundGeolocation - Location: $location');
+        SeguimientoVendedorRepository repositorySeguimientoVendedor = SeguimientoVendedorRepositoryImpl();
+        SeguimientoVendedor entidad = SeguimientoVendedor(
+          segId: 0,
+          venId: 0,
+          segFechaCreacion:
+          DateTime.tryParse(location.timestamp) ?? DateTime.now(),
+          segLatitud: location.coords.latitude,
+          segLongitud: location.coords.longitude,
+          vendedorNombre: "",
+        );
+        repositorySeguimientoVendedor.crearSeguimientoVendedor(entidad);
+      } catch (ex) {
+        // Error silencioso
+      }
+
+      break;
+    case bg.Event.MOTIONCHANGE:
+      bg.Location location = headlessEvent.event;
+      print('Debug BackgroundGeolocation - Location: $location');
+      break;
+    case bg.Event.GEOFENCE:
+      bg.GeofenceEvent geofenceEvent = headlessEvent.event;
+      print('Debug BackgroundGeolocation - GeofenceEvent: $geofenceEvent');
+      break;
+    case bg.Event.GEOFENCESCHANGE:
+      bg.GeofencesChangeEvent event = headlessEvent.event;
+      print('Debug BackgroundGeolocation - GeofencesChangeEvent: $event');
+      break;
+    case bg.Event.SCHEDULE:
+      bg.State state = headlessEvent.event;
+      print('Debug BackgroundGeolocation - State: $state');
+      break;
+    case bg.Event.ACTIVITYCHANGE:
+      bg.ActivityChangeEvent event = headlessEvent.event;
+      print('Debug BackgroundGeolocation ActivityChangeEvent: $event');
+      break;
+    case bg.Event.HTTP:
+      bg.HttpEvent response = headlessEvent.event;
+      print('Debug BackgroundGeolocation HttpEvent: $response');
+      break;
+    case bg.Event.POWERSAVECHANGE:
+      bool enabled = headlessEvent.event;
+      print('Debug BackgroundGeolocation ProviderChangeEvent: $enabled');
+      break;
+    case bg.Event.CONNECTIVITYCHANGE:
+      bg.ConnectivityChangeEvent event = headlessEvent.event;
+      print('Debug BackgroundGeolocation ConnectivityChangeEvent: $event');
+      break;
+    case bg.Event.ENABLEDCHANGE:
+      bool enabled = headlessEvent.event;
+      print('Debug BackgroundGeolocation EnabledChangeEvent: $enabled');
+      break;
+  }
+}
 
 void main() async {
   await Environment.initEnvironment();
@@ -13,6 +91,9 @@ void main() async {
   await initializeDateFormatting('es', null);
 
   runApp(ProviderScope(child: const MainApp()));
+
+  // Register your headlessTask:
+  BackgroundGeolocation.registerHeadlessTask(headlessTask);
 }
 
 class MainApp extends ConsumerWidget {
@@ -65,6 +146,9 @@ class MainApp extends ConsumerWidget {
             hintStyle: TextStyle(color: TemaColor.bodyTextColor),
           ),
         ),
+        builder: (context, child) {
+          return ConfigRastreoGps(child: child!);
+        },
       ),
     );
   }

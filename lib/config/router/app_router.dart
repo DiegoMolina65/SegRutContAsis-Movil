@@ -106,6 +106,7 @@ final goRouterProvider = Provider((ref) {
         path: ListaRutaScreen.nombreRuta,
         builder: (context, state) => const ListaRutaScreen(),
       ),
+
     ],
     /**Analizar la manera de tener una lista de rutas recorridas */
     redirect: (context, state) async {
