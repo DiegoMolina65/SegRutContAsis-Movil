@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/card/CustomCardRuta.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/export_custom_formulario.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/barra_superior_state.dart';
@@ -7,6 +8,7 @@ import 'package:med_geo_asistencia/features/presentation/core/componentes/layout
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/views/dialogo_mensaje_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/lista_ruta_screen/providers/lista_ruta_screen_provider.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/crear_ruta_screen/crear_ruta_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/visita_por_ruta_screen/visita_por_ruta_screen.dart';
 
 class ListaRutaScreen extends StatelessWidget {
   static const nombreRuta = '/lista-ruta-screen';
@@ -77,11 +79,20 @@ class ListaRutaView extends ConsumerWidget {
 
         if (next.datosExtras is int) {
           final rutId = next.datosExtras as int;
+
+          // Lógica de Edición
           if (rutId > 0) {
             await Navigator.of(
               context,
             ).pushNamed(CrearRutaScreen.nombreRuta, arguments: rutId);
             notificador.obtenerRutas();
+          }
+          // Lógica de Visitas
+          else if (next.titulo == "Navegar a lista de visitas") {
+            if (rutId > 0) {
+              // Usamos context.push para GoRouter
+              context.push('${VisitaPorRutaScreen.nombreRuta}/$rutId');
+            }
           }
         }
       }
@@ -128,7 +139,7 @@ class ListaRutaView extends ConsumerWidget {
           return CustomCardRuta(
             ruta: ruta,
             onTap: () {
-              // Lógica al presionar la tarjeta
+              notificador.onVerVisitas(ruta.rutId);
             },
             onEdit: () => notificador.onEditarRuta(ruta.rutId),
             onDelete: () =>

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
+    
 part 'visita.freezed.dart';
 part 'visita.g.dart';
 

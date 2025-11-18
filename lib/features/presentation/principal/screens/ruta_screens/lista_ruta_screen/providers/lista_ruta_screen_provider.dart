@@ -38,12 +38,22 @@ class ListaRutaScreenNotifier extends StateNotifier<ListaRutaScreenState> {
     }
   }
 
+  // Maneja la navegación a la pantalla de visitas por ruta
+  void onVerVisitas(int rutId) {
+    state = state.copyWith(
+      eventoUI: MensajeUI.infoMensaje(
+        "Navegar a lista de visitas",
+        datosExtras: rutId,
+      ),
+    );
+  }
+
   // Maneja la navegación a la pantalla de edición
   void onEditarRuta(int rutId) {
     state = state.copyWith(
       eventoUI: MensajeUI.infoMensaje(
         "Navegar a edición de ruta",
-        datosExtras: rutId, 
+        datosExtras: rutId,
       ),
     );
   }
@@ -55,12 +65,16 @@ class ListaRutaScreenNotifier extends StateNotifier<ListaRutaScreenState> {
 
       if (exito) {
         state = state.copyWith(
-          eventoUI: MensajeUI.okMensaje("Ruta $rutId eliminada (desactivada) con éxito."),
+          eventoUI: MensajeUI.okMensaje(
+            "Ruta $rutId eliminada (desactivada) con éxito.",
+          ),
         );
         await obtenerRutas();
       } else {
         state = state.copyWith(
-          mensajeUi: MensajeUI.errorMensaje("Error al desactivar la Ruta $rutId. Intente de nuevo."),
+          mensajeUi: MensajeUI.errorMensaje(
+            "Error al desactivar la Ruta $rutId. Intente de nuevo.",
+          ),
         );
       }
     } catch (e, stackTrace) {
@@ -70,7 +84,7 @@ class ListaRutaScreenNotifier extends StateNotifier<ListaRutaScreenState> {
           stackTrace: stackTrace,
         ),
       );
-      await obtenerRutas(); 
+      await obtenerRutas();
     }
   }
 }

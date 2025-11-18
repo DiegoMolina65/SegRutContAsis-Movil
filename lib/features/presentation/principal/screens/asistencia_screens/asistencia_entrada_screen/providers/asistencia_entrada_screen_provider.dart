@@ -4,7 +4,7 @@ import 'package:med_geo_asistencia/features/domain/repositories/asistencia_repos
 import 'package:med_geo_asistencia/features/infraestructure/contratos/asistencia/repositories/provider_asistencia_repository.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/mensaje_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/asistencia_screens/asistencia_entrada_screen/providers/asistencia_entrada_screen_state.dart';
-import 'package:med_geo_asistencia/shared/geolocator/obtener_ubicacion_actual_provider.dart';
+import 'package:med_geo_asistencia/shared/provider/geolocator/obtener_ubicacion_actual_provider.dart';
 
 final crearAsistenciaEntradaScreenProvider =
     StateNotifierProvider.autoDispose<

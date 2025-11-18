@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/CustomFilledButton.dart';
+import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/custom_filled_button.dart';
 import 'package:med_geo_asistencia/features/presentation/core/eventos_ui/eventos_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/mensaje_ui.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/views/dialogo_mensaje_ui.dart';

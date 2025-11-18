@@ -10,6 +10,7 @@ import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_
 import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/lista_ruta_screen/lista_ruta_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/crear_visita_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/lista_visita_screen/lista_visita_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/visita_por_ruta_screen/visita_por_ruta_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/screens_referencias.dart';
 
 import 'app_router_notifier.dart';
@@ -18,10 +19,8 @@ final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 final goRouterProvider = Provider((ref) {
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
-  // final navigatorKey = ref.read(navigationKeyProvider);
 
   return GoRouter(
-    // navigatorKey: navigatorKey,
     initialLocation: SplashScreen.nombreRuta,
     refreshListenable: goRouterNotifier,
     observers: [routeObserver],
@@ -63,6 +62,19 @@ final goRouterProvider = Provider((ref) {
         },
       ),
       GoRoute(
+        path: '${VisitaPorRutaScreen.nombreRuta}/:rutId',
+        builder: (context, state) {
+          final rutIdString = state.pathParameters['rutId'];
+          final rutId = int.tryParse(rutIdString ?? '');
+          if (rutId == null) {
+            return const Scaffold(
+              body: Center(child: Text('Error: ID de ruta no válido')),
+            );
+          }
+          return VisitaPorRutaScreen(rutId: rutId);
+        },
+      ),
+      GoRoute(
         path: ListaVisitaScreen.nombreRuta,
         builder: (context, state) => const ListaVisitaScreen(),
       ),
@@ -98,97 +110,6 @@ final goRouterProvider = Provider((ref) {
         path: ListaRutaScreen.nombreRuta,
         builder: (context, state) => const ListaRutaScreen(),
       ),
-      // GoRoute(
-      // GoRoute(
-      // GoRoute(
-      //   path: MarcacionScreen.nombreRuta,
-      //   builder: (context, state) => const MarcacionScreen(),
-      // ),
-      // GoRoute(
-      //   path: UbicacionScreen.nombreRuta,
-      //   builder: (context, state) => const UbicacionScreen(),
-      // ),
-      // GoRoute(
-      //   path: "${InfoEmpresaDetalleScreen.nombreRuta}/:idEmpresa",
-      //   builder: (context, state) {
-      //     final idEmpresa =
-      //         int.tryParse(state.pathParameters['idEmpresa'] ?? '0') ?? 0;
-      //     return InfoEmpresaDetalleScreen(idEmpresa: idEmpresa);
-      //   },
-      // ),
-      // GoRoute(
-      //   path: "${UbicacionEmpresaScreen.nombreRuta}/:idEmpresa",
-      //   builder: (context, state) {
-      //     final idEmpresa =
-      //         int.tryParse(state.pathParameters['idEmpresa'] ?? '0') ?? 0;
-      //     return UbicacionEmpresaScreen(idEmpresa: idEmpresa);
-      //   },
-      // ),
-      // GoRoute(
-      //   path: UsuarioScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const UsuarioScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: SincronizacionScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const SincronizacionScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: AutogestionScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const AutogestionScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: DescargarBoletaDePagoScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const DescargarBoletaDePagoScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: SolicitarVacacionScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const SolicitarVacacionScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: ListarSolicitudesDeVacacionesScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const ListarSolicitudesDeVacacionesScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: CambioContrasenaScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const CambioContrasenaScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: FormularioSolicitarPermisosScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const FormularioSolicitarPermisosScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: CapturaDatosFacialesScreen.nombreRuta,
-      //   builder: (context, state) {
-      //     return const CapturaDatosFacialesScreen();
-      //   },
-      // ),
-      // GoRoute(
-      //   path: '/register/:idServidorUsuario',
-      //   builder: (context, state) {
-      //     final idServidorUsuario =
-      //         int.tryParse(state.pathParameters['idServidorUsuario'] ?? '0') ??
-      //             0;
-      //     return RegisterUserScreen(
-      //       idServidorUsuario: idServidorUsuario,
-      //     );
-      //   },
-      // ),
     ],
     /**Analizar la manera de tener una lista de rutas recorridas */
     redirect: (context, state) async {
@@ -211,7 +132,7 @@ final goRouterProvider = Provider((ref) {
       if (authStatus == AutenticacionEstatus.autenticado) {
         if (isGoingTo == LoginScreen.nombreRuta) {
           /// Si no es las anteriores mandamos al menu principal
-          return ListaAsistenciaScreen.nombreRuta;
+          return VisitaPorRutaScreen.nombreRuta;
         }
       }
 

@@ -9,6 +9,7 @@ import 'package:med_geo_asistencia/features/domain/modelos/resultado.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/asistencia_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/cliente_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/direccion_cliente_mapper.dart';
+import 'package:med_geo_asistencia/features/infraestructure/mappers/marcar_llegada_visita_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/ruta_mapper.dart';
 
 import 'package:med_geo_asistencia/features/infraestructure/mappers/usuario_mapper.dart';
@@ -505,6 +506,41 @@ class ApiCliente extends DioServicio {
           .toList();
     } catch (e) {
       throw Exception("Error al obtener asistencias: $e");
+    }
+  }
+
+  // TODO: Servicios marcar llegada visita
+  Future<MarcarLlegadaVisita> crearMarcarLlegadaVisita(
+    MarcarLlegadaVisita marcarLlegadaVisita,
+  ) async {
+    try {
+      final dto = MarcarLlegadaVisitaMapper.obtenerDto(marcarLlegadaVisita);
+
+      final body = {
+        "visId": dto.visId,
+        "mlvHora": dto.mlvHora,
+        "mlvLatitud": dto.mlvLatitud,
+        "mlvLongitud": dto.mlvLongitud,
+      };
+
+      final response = await post(
+        "MarcarLlegadaVisita/crearMarcarLlegadaVisita",
+        data: body,
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+          responseType: ResponseType.json,
+        ),
+      );
+
+      final json = response.data is String
+          ? jsonDecode(response.data)
+          : response.data;
+
+      return MarcarLlegadaVisitaMapper.obtenerEntidad(
+        MarcarLlegadaVisitaDto.fromJson(json),
+      );
+    } catch (e) {
+      throw Exception("Error al crear marcación visita: $e");
     }
   }
 }
