@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/CustomElevatedButton.dart';
-import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/CustomTextFormField.dart';
+import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/custom_elevated_button.dart';
+import 'package:med_geo_asistencia/features/presentation/core/componentes/formulario/custom_text_form_field.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/barra_superior_state.dart';
 import 'package:med_geo_asistencia/features/presentation/core/componentes/layouts/estructura_base.dart';
 import 'package:med_geo_asistencia/features/presentation/core/helpers/extensiones/loading_overlay_extension.dart';

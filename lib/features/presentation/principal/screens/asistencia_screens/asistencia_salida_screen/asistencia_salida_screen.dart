@@ -66,7 +66,7 @@ class _AsistenciaSalidaViewState extends ConsumerState<AsistenciaSalidaView> {
       }
     });
 
-    // Provider que trae supervisores y vendedores (Es el mismo)
+    // Provider que trae supervisores y vendedores 
     final dataAsync = ref.watch(obtenerSupervisorVendedorProvider);
 
     return dataAsync.when(

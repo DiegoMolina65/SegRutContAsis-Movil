@@ -10,6 +10,7 @@ import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_
 import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_screens/lista_ruta_screen/lista_ruta_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/crear_visita_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/lista_visita_screen/lista_visita_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/visita_por_ruta_screen/visita_por_ruta_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/screens_referencias.dart';
 
 import 'app_router_notifier.dart';
@@ -18,10 +19,8 @@ final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 final goRouterProvider = Provider((ref) {
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
-  // final navigatorKey = ref.read(navigationKeyProvider);
 
   return GoRouter(
-    // navigatorKey: navigatorKey,
     initialLocation: SplashScreen.nombreRuta,
     refreshListenable: goRouterNotifier,
     observers: [routeObserver],
@@ -60,6 +59,19 @@ final goRouterProvider = Provider((ref) {
           final visIdString = state.pathParameters['visId'];
           final visId = int.tryParse(visIdString ?? '');
           return CrearVisitaScreen(visId: visId);
+        },
+      ),
+      GoRoute(
+        path: '${VisitaPorRutaScreen.nombreRuta}/:rutId',
+        builder: (context, state) {
+          final rutIdString = state.pathParameters['rutId'];
+          final rutId = int.tryParse(rutIdString ?? '');
+          if (rutId == null) {
+            return const Scaffold(
+              body: Center(child: Text('Error: ID de ruta no válido')),
+            );
+          }
+          return VisitaPorRutaScreen(rutId: rutId);
         },
       ),
       GoRoute(
@@ -121,7 +133,7 @@ final goRouterProvider = Provider((ref) {
       if (authStatus == AutenticacionEstatus.autenticado) {
         if (isGoingTo == LoginScreen.nombreRuta) {
           /// Si no es las anteriores mandamos al menu principal
-          return CrearRutaScreen.nombreRuta;
+          return VisitaPorRutaScreen.nombreRuta;
         }
       }
 
