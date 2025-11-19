@@ -186,9 +186,7 @@ class ApiCliente extends DioServicio {
         "supId": dto.supId,
         "rutNombre": dto.rutNombre,
         "rutComentario": dto.rutComentario,
-        "rutFechaEjecucion": DateFormat(
-          "yyyy-MM-dd HH:mm:ss",
-        ).format(dto.rutFechaEjecucion),
+        "rutFechaEjecucion": dto.rutFechaEjecucion.toIso8601String(),
       };
 
       final response = await post(
