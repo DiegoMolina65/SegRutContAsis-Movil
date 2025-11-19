@@ -86,11 +86,11 @@ class VisitaPorRutaNotifier extends StateNotifier<VisitaPorRutaScreenState> {
       }
 
       final now = DateTime.now();
-      final mlvHoraCalculada = Duration(
-        hours: now.hour,
-        minutes: now.minute,
-        seconds: now.second,
-      );
+
+      final mlvHoraCalculada =
+          "${now.hour.toString().padLeft(2, '0')}:"
+          "${now.minute.toString().padLeft(2, '0')}:"
+          "${now.second.toString().padLeft(2, '0')}";
 
       final MarcarLlegadaVisita llegadaData = MarcarLlegadaVisita(
         mlvId: 0,
@@ -102,8 +102,8 @@ class VisitaPorRutaNotifier extends StateNotifier<VisitaPorRutaScreenState> {
         mlvFechaCreacion: "",
         nombreCliente: "",
         nombreSucursalCliente: "",
-        sucursalLatitud: "",
-        sucursalLongitud: "",
+        sucursalLatitud: 0.0,
+        sucursalLongitud: 0.0,
         nombreVendedor: "",
         usuarioLogVendedor: "",
         telefonoVendedor: "",

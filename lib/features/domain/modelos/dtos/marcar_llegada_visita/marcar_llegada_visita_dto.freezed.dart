@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$MarcarLlegadaVisitaDto {
 
- int get mlvId; int get visId; Duration? get mlvHora; double get mlvLatitud; double get mlvLongitud; bool get mlvEstadoDel; String get mlvFechaCreacion; String? get nombreCliente; String? get nombreSucursalCliente; String? get sucursalLatitud; String? get sucursalLongitud; String? get nombreVendedor; String? get usuarioLogVendedor; String? get telefonoVendedor;
+ int get mlvId; int get visId; String? get mlvHora; double get mlvLatitud; double get mlvLongitud; bool get mlvEstadoDel; String get mlvFechaCreacion; String? get nombreCliente; String? get nombreSucursalCliente; double? get sucursalLatitud; double? get sucursalLongitud; String? get nombreVendedor; String? get usuarioLogVendedor; String? get telefonoVendedor;
 /// Create a copy of MarcarLlegadaVisitaDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $MarcarLlegadaVisitaDtoCopyWith<$Res>  {
   factory $MarcarLlegadaVisitaDtoCopyWith(MarcarLlegadaVisitaDto value, $Res Function(MarcarLlegadaVisitaDto) _then) = _$MarcarLlegadaVisitaDtoCopyWithImpl;
 @useResult
 $Res call({
- int mlvId, int visId, Duration? mlvHora, double mlvLatitud, double mlvLongitud, bool mlvEstadoDel, String mlvFechaCreacion, String? nombreCliente, String? nombreSucursalCliente, String? sucursalLatitud, String? sucursalLongitud, String? nombreVendedor, String? usuarioLogVendedor, String? telefonoVendedor
+ int mlvId, int visId, String? mlvHora, double mlvLatitud, double mlvLongitud, bool mlvEstadoDel, String mlvFechaCreacion, String? nombreCliente, String? nombreSucursalCliente, double? sucursalLatitud, double? sucursalLongitud, String? nombreVendedor, String? usuarioLogVendedor, String? telefonoVendedor
 });
 
 
@@ -70,15 +70,15 @@ class _$MarcarLlegadaVisitaDtoCopyWithImpl<$Res>
 mlvId: null == mlvId ? _self.mlvId : mlvId // ignore: cast_nullable_to_non_nullable
 as int,visId: null == visId ? _self.visId : visId // ignore: cast_nullable_to_non_nullable
 as int,mlvHora: freezed == mlvHora ? _self.mlvHora : mlvHora // ignore: cast_nullable_to_non_nullable
-as Duration?,mlvLatitud: null == mlvLatitud ? _self.mlvLatitud : mlvLatitud // ignore: cast_nullable_to_non_nullable
+as String?,mlvLatitud: null == mlvLatitud ? _self.mlvLatitud : mlvLatitud // ignore: cast_nullable_to_non_nullable
 as double,mlvLongitud: null == mlvLongitud ? _self.mlvLongitud : mlvLongitud // ignore: cast_nullable_to_non_nullable
 as double,mlvEstadoDel: null == mlvEstadoDel ? _self.mlvEstadoDel : mlvEstadoDel // ignore: cast_nullable_to_non_nullable
 as bool,mlvFechaCreacion: null == mlvFechaCreacion ? _self.mlvFechaCreacion : mlvFechaCreacion // ignore: cast_nullable_to_non_nullable
 as String,nombreCliente: freezed == nombreCliente ? _self.nombreCliente : nombreCliente // ignore: cast_nullable_to_non_nullable
 as String?,nombreSucursalCliente: freezed == nombreSucursalCliente ? _self.nombreSucursalCliente : nombreSucursalCliente // ignore: cast_nullable_to_non_nullable
 as String?,sucursalLatitud: freezed == sucursalLatitud ? _self.sucursalLatitud : sucursalLatitud // ignore: cast_nullable_to_non_nullable
-as String?,sucursalLongitud: freezed == sucursalLongitud ? _self.sucursalLongitud : sucursalLongitud // ignore: cast_nullable_to_non_nullable
-as String?,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as double?,sucursalLongitud: freezed == sucursalLongitud ? _self.sucursalLongitud : sucursalLongitud // ignore: cast_nullable_to_non_nullable
+as double?,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
 as String?,usuarioLogVendedor: freezed == usuarioLogVendedor ? _self.usuarioLogVendedor : usuarioLogVendedor // ignore: cast_nullable_to_non_nullable
 as String?,telefonoVendedor: freezed == telefonoVendedor ? _self.telefonoVendedor : telefonoVendedor // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -166,7 +166,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int mlvId,  int visId,  Duration? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  String? sucursalLatitud,  String? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int mlvId,  int visId,  String? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  double? sucursalLatitud,  double? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _MarcarLlegadaVisitaDto() when $default != null:
 return $default(_that.mlvId,_that.visId,_that.mlvHora,_that.mlvLatitud,_that.mlvLongitud,_that.mlvEstadoDel,_that.mlvFechaCreacion,_that.nombreCliente,_that.nombreSucursalCliente,_that.sucursalLatitud,_that.sucursalLongitud,_that.nombreVendedor,_that.usuarioLogVendedor,_that.telefonoVendedor);case _:
@@ -187,7 +187,7 @@ return $default(_that.mlvId,_that.visId,_that.mlvHora,_that.mlvLatitud,_that.mlv
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int mlvId,  int visId,  Duration? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  String? sucursalLatitud,  String? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int mlvId,  int visId,  String? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  double? sucursalLatitud,  double? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)  $default,) {final _that = this;
 switch (_that) {
 case _MarcarLlegadaVisitaDto():
 return $default(_that.mlvId,_that.visId,_that.mlvHora,_that.mlvLatitud,_that.mlvLongitud,_that.mlvEstadoDel,_that.mlvFechaCreacion,_that.nombreCliente,_that.nombreSucursalCliente,_that.sucursalLatitud,_that.sucursalLongitud,_that.nombreVendedor,_that.usuarioLogVendedor,_that.telefonoVendedor);case _:
@@ -207,7 +207,7 @@ return $default(_that.mlvId,_that.visId,_that.mlvHora,_that.mlvLatitud,_that.mlv
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int mlvId,  int visId,  Duration? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  String? sucursalLatitud,  String? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int mlvId,  int visId,  String? mlvHora,  double mlvLatitud,  double mlvLongitud,  bool mlvEstadoDel,  String mlvFechaCreacion,  String? nombreCliente,  String? nombreSucursalCliente,  double? sucursalLatitud,  double? sucursalLongitud,  String? nombreVendedor,  String? usuarioLogVendedor,  String? telefonoVendedor)?  $default,) {final _that = this;
 switch (_that) {
 case _MarcarLlegadaVisitaDto() when $default != null:
 return $default(_that.mlvId,_that.visId,_that.mlvHora,_that.mlvLatitud,_that.mlvLongitud,_that.mlvEstadoDel,_that.mlvFechaCreacion,_that.nombreCliente,_that.nombreSucursalCliente,_that.sucursalLatitud,_that.sucursalLongitud,_that.nombreVendedor,_that.usuarioLogVendedor,_that.telefonoVendedor);case _:
@@ -227,15 +227,15 @@ class _MarcarLlegadaVisitaDto implements MarcarLlegadaVisitaDto {
 
 @override final  int mlvId;
 @override final  int visId;
-@override final  Duration? mlvHora;
+@override final  String? mlvHora;
 @override final  double mlvLatitud;
 @override final  double mlvLongitud;
 @override final  bool mlvEstadoDel;
 @override final  String mlvFechaCreacion;
 @override final  String? nombreCliente;
 @override final  String? nombreSucursalCliente;
-@override final  String? sucursalLatitud;
-@override final  String? sucursalLongitud;
+@override final  double? sucursalLatitud;
+@override final  double? sucursalLongitud;
 @override final  String? nombreVendedor;
 @override final  String? usuarioLogVendedor;
 @override final  String? telefonoVendedor;
@@ -273,7 +273,7 @@ abstract mixin class _$MarcarLlegadaVisitaDtoCopyWith<$Res> implements $MarcarLl
   factory _$MarcarLlegadaVisitaDtoCopyWith(_MarcarLlegadaVisitaDto value, $Res Function(_MarcarLlegadaVisitaDto) _then) = __$MarcarLlegadaVisitaDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int mlvId, int visId, Duration? mlvHora, double mlvLatitud, double mlvLongitud, bool mlvEstadoDel, String mlvFechaCreacion, String? nombreCliente, String? nombreSucursalCliente, String? sucursalLatitud, String? sucursalLongitud, String? nombreVendedor, String? usuarioLogVendedor, String? telefonoVendedor
+ int mlvId, int visId, String? mlvHora, double mlvLatitud, double mlvLongitud, bool mlvEstadoDel, String mlvFechaCreacion, String? nombreCliente, String? nombreSucursalCliente, double? sucursalLatitud, double? sucursalLongitud, String? nombreVendedor, String? usuarioLogVendedor, String? telefonoVendedor
 });
 
 
@@ -295,15 +295,15 @@ class __$MarcarLlegadaVisitaDtoCopyWithImpl<$Res>
 mlvId: null == mlvId ? _self.mlvId : mlvId // ignore: cast_nullable_to_non_nullable
 as int,visId: null == visId ? _self.visId : visId // ignore: cast_nullable_to_non_nullable
 as int,mlvHora: freezed == mlvHora ? _self.mlvHora : mlvHora // ignore: cast_nullable_to_non_nullable
-as Duration?,mlvLatitud: null == mlvLatitud ? _self.mlvLatitud : mlvLatitud // ignore: cast_nullable_to_non_nullable
+as String?,mlvLatitud: null == mlvLatitud ? _self.mlvLatitud : mlvLatitud // ignore: cast_nullable_to_non_nullable
 as double,mlvLongitud: null == mlvLongitud ? _self.mlvLongitud : mlvLongitud // ignore: cast_nullable_to_non_nullable
 as double,mlvEstadoDel: null == mlvEstadoDel ? _self.mlvEstadoDel : mlvEstadoDel // ignore: cast_nullable_to_non_nullable
 as bool,mlvFechaCreacion: null == mlvFechaCreacion ? _self.mlvFechaCreacion : mlvFechaCreacion // ignore: cast_nullable_to_non_nullable
 as String,nombreCliente: freezed == nombreCliente ? _self.nombreCliente : nombreCliente // ignore: cast_nullable_to_non_nullable
 as String?,nombreSucursalCliente: freezed == nombreSucursalCliente ? _self.nombreSucursalCliente : nombreSucursalCliente // ignore: cast_nullable_to_non_nullable
 as String?,sucursalLatitud: freezed == sucursalLatitud ? _self.sucursalLatitud : sucursalLatitud // ignore: cast_nullable_to_non_nullable
-as String?,sucursalLongitud: freezed == sucursalLongitud ? _self.sucursalLongitud : sucursalLongitud // ignore: cast_nullable_to_non_nullable
-as String?,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
+as double?,sucursalLongitud: freezed == sucursalLongitud ? _self.sucursalLongitud : sucursalLongitud // ignore: cast_nullable_to_non_nullable
+as double?,nombreVendedor: freezed == nombreVendedor ? _self.nombreVendedor : nombreVendedor // ignore: cast_nullable_to_non_nullable
 as String?,usuarioLogVendedor: freezed == usuarioLogVendedor ? _self.usuarioLogVendedor : usuarioLogVendedor // ignore: cast_nullable_to_non_nullable
 as String?,telefonoVendedor: freezed == telefonoVendedor ? _self.telefonoVendedor : telefonoVendedor // ignore: cast_nullable_to_non_nullable
 as String?,

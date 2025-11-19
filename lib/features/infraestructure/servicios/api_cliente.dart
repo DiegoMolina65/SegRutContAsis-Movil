@@ -522,7 +522,7 @@ class ApiCliente extends DioServicio {
 
       final body = {
         "visId": dto.visId,
-        "mlvHora": dto.mlvHora,
+        "mlvHora": dto.mlvHora?.toString(),
         "mlvLatitud": dto.mlvLatitud,
         "mlvLongitud": dto.mlvLongitud,
       };
@@ -549,7 +549,9 @@ class ApiCliente extends DioServicio {
   }
 
   // TODO: Servicios seguimiento de vendedor
-  Future<SeguimientoVendedor> crearSeguimientoVendedor(SeguimientoVendedor entidad) async {
+  Future<SeguimientoVendedor> crearSeguimientoVendedor(
+    SeguimientoVendedor entidad,
+  ) async {
     try {
       final dto = SeguimientoVendedorMapper.obtenerDto(entidad);
 
@@ -561,7 +563,6 @@ class ApiCliente extends DioServicio {
           headers: {"Content-Type": "application/json"},
           responseType: ResponseType.json,
           sendTimeout: Duration(seconds: 3),
-
         ),
       );
 
@@ -569,10 +570,11 @@ class ApiCliente extends DioServicio {
           ? jsonDecode(response.data)
           : response.data;
 
-      return SeguimientoVendedorMapper.obtenerEntidad(SeguimientoVendedorDto.fromJson(json));
+      return SeguimientoVendedorMapper.obtenerEntidad(
+        SeguimientoVendedorDto.fromJson(json),
+      );
     } catch (e) {
-      throw Exception("Error al crear cliente: $e");
+      throw Exception("Error al crear Seguimiento vendedor: $e");
     }
   }
-
 }
