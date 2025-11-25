@@ -34,10 +34,12 @@ class CustomTextFormField extends StatefulWidget {
   final bool filled;
   final bool requerido;
   final String? mensajeValidacion;
+  final String? initialValue;
 
   const CustomTextFormField({
     super.key,
     this.hintText,
+    this.initialValue,
     this.labelText,
     this.helperText,
     this.errorText,
@@ -131,6 +133,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
     return TextFormField(
       controller: widget.controller,
+      initialValue: widget.initialValue,
       focusNode: widget.focusNode,
       onChanged: widget.onChanged,
       onFieldSubmitted: widget.onFieldSubmitted,

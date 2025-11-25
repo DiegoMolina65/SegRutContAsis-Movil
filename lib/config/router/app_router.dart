@@ -11,6 +11,7 @@ import 'package:med_geo_asistencia/features/presentation/principal/screens/ruta_
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/crear_visita_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/lista_visita_screen/lista_visita_screen.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/visita_por_ruta_screen/visita_por_ruta_screen.dart';
+import 'package:med_geo_asistencia/features/presentation/principal/screens/evidencia_screens/crear_evidencia_screen/crear_evidencia_screen.dart'; // <--- NUEVO IMPORT
 import 'package:med_geo_asistencia/features/presentation/screens_referencias.dart';
 
 import 'app_router_notifier.dart';
@@ -34,8 +35,8 @@ final goRouterProvider = Provider((ref) {
         builder: (context, state) => const LoginScreen(),
       ),
       // GoRoute(
-      //   path: SettingScreen.nombreRuta,
-      //   builder: (context, state) => const SettingScreen(),
+      // 	path: SettingScreen.nombreRuta,
+      // 	builder: (context, state) => const SettingScreen(),
       // ),
 
       // TODO: clientes
@@ -73,6 +74,21 @@ final goRouterProvider = Provider((ref) {
       GoRoute(
         path: ListaVisitaScreen.nombreRuta,
         builder: (context, state) => const ListaVisitaScreen(),
+      ),
+      
+      // TODO: evidencias
+      GoRoute(
+        path: '${CrearEvidenciaScreen.nombreRuta}/:visId', 
+        builder: (context, state) {
+          final visIdString = state.pathParameters['visId'];
+          final visId = int.tryParse(visIdString ?? '');
+          if (visId == null || visId <= 0) {
+            return const Scaffold(
+              body: Center(child: Text('Error: ID de Visita no válido')),
+            );
+          }
+          return CrearEvidenciaScreen(visitaId: visId);
+        },
       ),
 
       // TODO: asistencias

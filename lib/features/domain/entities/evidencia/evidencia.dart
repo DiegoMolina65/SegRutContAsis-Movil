@@ -9,8 +9,8 @@ abstract class Evidencia with _$Evidencia {
     required int eviId,
     required DateTime eviFechaCreacion,
     required int visitaId,
-    required String eviTipo,
-    required String eviObservaciones,
+    required String? eviTipo,
+    required String? eviObservaciones,
   }) = _Evidencia;
   factory Evidencia.fromJson(Map<String, Object?> json) =>
       _$EvidenciaFromJson(json);

@@ -10,6 +10,7 @@ import 'package:med_geo_asistencia/features/domain/modelos/resultado.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/asistencia_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/cliente_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/direccion_cliente_mapper.dart';
+import 'package:med_geo_asistencia/features/infraestructure/mappers/evidencia_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/marcar_llegada_visita_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/ruta_mapper.dart';
 import 'package:med_geo_asistencia/features/infraestructure/mappers/seguimiento_vendedor_mapper.dart';
@@ -573,6 +574,36 @@ class ApiCliente extends DioServicio {
       );
     } catch (e) {
       throw Exception("Error al crear Seguimiento vendedor: $e");
+    }
+  }
+
+  // TODO: Servicios evidencia:
+  Future<Evidencia> crearEvidenciaVisita(Evidencia marcarLlegadaVisita) async {
+    try {
+      final dto = EvidenciaMapper.obtenerDto(marcarLlegadaVisita);
+
+      final body = {
+        "visitaId": dto.visitaId,
+        "eviTipo": dto.eviTipo,
+        "eviObservaciones": dto.eviObservaciones,
+      };
+
+      final response = await post(
+        "Evidencia/crearEvidencia",
+        data: body,
+        options: Options(
+          headers: {"Content-Type": "application/json"},
+          responseType: ResponseType.json,
+        ),
+      );
+
+      final json = response.data is String
+          ? jsonDecode(response.data)
+          : response.data;
+
+      return EvidenciaMapper.obtenerEntidad(EvidenciaDto.fromJson(json));
+    } catch (e) {
+      throw Exception("Error al crear evidencia: $e");
     }
   }
 }
