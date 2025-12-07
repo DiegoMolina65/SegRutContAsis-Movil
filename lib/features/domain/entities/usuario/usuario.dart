@@ -27,7 +27,7 @@ abstract class Usuario with _$Usuario {
     @Default(false) bool esVendedor,
   }) = _Usuario;
 
-  /// Constructor necesario por nombre de atributos para integrar a la tabla drift
+  /// Constructor por nombre de atributos para integrar a la tabla drift
   factory Usuario.desdeBaseDeDatos({
     required int id,
     required String nombre_completo,

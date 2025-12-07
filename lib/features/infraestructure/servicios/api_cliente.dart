@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:intl/intl.dart';
 import 'package:med_geo_asistencia/config/constantes/environment.dart';
 import 'package:med_geo_asistencia/config/constantes/llave_app_preferencia.dart';
 import 'package:med_geo_asistencia/features/domain/entities/export_entities.dart';

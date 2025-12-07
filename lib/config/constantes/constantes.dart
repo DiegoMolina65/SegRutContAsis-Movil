@@ -9,11 +9,8 @@ class TemaColor {
 }
 
 class ConfigBaseDeDatos {
-  static const String nombreBaseDeDatos = "movil_segrutcontasis_v1.db";
+  static const String nombreBaseDeDatos = "movil_segrutcontasis_v2.db";
 }
 
 /// Enums
-enum RolUsuario {
-  supervisor,
-  vendedor,
-}
+enum RolUsuario { supervisor, vendedor }

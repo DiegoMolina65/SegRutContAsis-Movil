@@ -14,7 +14,7 @@ class EvidenciaMapper {
   // Entidad > DTO
   static EvidenciaDto obtenerDto(Evidencia entity) => EvidenciaDto(
     eviId: entity.eviId,
-    eviFechaCreacion: entity.eviFechaCreacion,
+    eviFechaCreacion: entity.eviFechaCreacion ?? DateTime.now(),
     visitaId: entity.visitaId,
     eviTipo: entity.eviTipo,
     eviObservaciones: entity.eviObservaciones,
