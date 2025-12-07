@@ -9,6 +9,7 @@ import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialog
 import 'package:med_geo_asistencia/shared/provider/obtener_direccion_cliente_provider.dart';
 import 'package:med_geo_asistencia/features/presentation/principal/screens/visita_screens/crear_visita_screen/providers/crear_visita_screen_provider.dart';
 import 'package:med_geo_asistencia/shared/provider/obtener_ruta_provider.dart';
+import 'package:intl/intl.dart';
 
 class CrearVisitaScreen extends StatelessWidget {
   static const nombreRuta = '/crear-visita-screen';
@@ -116,7 +117,7 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        // SELECCIONAR RUTA
+                        // SELECCIONAR
                         const CustomText.etiqueta(
                           "Ruta asignada:",
                           color: Colors.black,
@@ -133,9 +134,15 @@ class _CrearVisitaViewState extends ConsumerState<CrearVisitaView> {
                               children: [
                                 CustomSelectCustom<int>(
                                   items: ruta.map((e) => e.rutId).toList(),
-                                  itemLabel: (id) => ruta
-                                      .firstWhere((e) => e.rutId == id)
-                                      .rutNombre,
+                                  itemLabel: (id) {
+                                    final item = ruta.firstWhere(
+                                      (e) => e.rutId == id,
+                                    );
+                                    final fecha = DateFormat(
+                                      'dd/MM/yyyy',
+                                    ).format(item.rutFechaEjecucion);
+                                    return "${item.rutNombre} - $fecha";
+                                  },
                                   value: field.value,
                                   onChanged: (value) {
                                     field.didChange(value);
