@@ -8,9 +8,8 @@ class TblMarcarllegadavisita extends Table {
   TextColumn get mlvHora => text()();
   RealColumn get mlvLatitud => real()();
   RealColumn get mlvLongitud => real()();
-
-  BoolColumn get mlvEstadoDel => boolean().nullable()();
-  TextColumn get mlvFechaCreacion => text().nullable()();
+  BoolColumn get mlvEstadoDel => boolean()();
+  TextColumn get mlvFechaCreacion => text()();
   TextColumn get nombreCliente => text().nullable()();
   TextColumn get nombreSucursalCliente => text().nullable()();
   RealColumn get sucursalLatitud => real().nullable()();

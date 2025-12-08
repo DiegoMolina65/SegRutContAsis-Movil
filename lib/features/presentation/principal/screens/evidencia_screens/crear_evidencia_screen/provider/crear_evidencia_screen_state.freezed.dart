@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 mixin _$CrearEvidenciaScreenState {
 
  MensajeUI? get mensajeUi; MensajeUI? get eventoUI;/// Campos del formulario
- int get visitaId; String get eviTipo; String get eviObservaciones; bool get isCargando;
+ int get visitaId; String get eviTipo; String get eviObservaciones; File? get archivo; bool get isCargando;
 /// Create a copy of CrearEvidenciaScreenState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $CrearEvidenciaScreenStateCopyWith<CrearEvidenciaScreenState> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearEvidenciaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CrearEvidenciaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.archivo, archivo) || other.archivo == archivo)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visitaId,eviTipo,eviObservaciones,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visitaId,eviTipo,eviObservaciones,archivo,isCargando);
 
 @override
 String toString() {
-  return 'CrearEvidenciaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, isCargando: $isCargando)';
+  return 'CrearEvidenciaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, archivo: $archivo, isCargando: $isCargando)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $CrearEvidenciaScreenStateCopyWith<$Res>  {
   factory $CrearEvidenciaScreenStateCopyWith(CrearEvidenciaScreenState value, $Res Function(CrearEvidenciaScreenState) _then) = _$CrearEvidenciaScreenStateCopyWithImpl;
 @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int visitaId, String eviTipo, String eviObservaciones, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int visitaId, String eviTipo, String eviObservaciones, File? archivo, bool isCargando
 });
 
 
@@ -63,14 +63,15 @@ class _$CrearEvidenciaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearEvidenciaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visitaId = null,Object? eviTipo = null,Object? eviObservaciones = null,Object? isCargando = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visitaId = null,Object? eviTipo = null,Object? eviObservaciones = null,Object? archivo = freezed,Object? isCargando = null,}) {
   return _then(_self.copyWith(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,visitaId: null == visitaId ? _self.visitaId : visitaId // ignore: cast_nullable_to_non_nullable
 as int,eviTipo: null == eviTipo ? _self.eviTipo : eviTipo // ignore: cast_nullable_to_non_nullable
 as String,eviObservaciones: null == eviObservaciones ? _self.eviObservaciones : eviObservaciones // ignore: cast_nullable_to_non_nullable
-as String,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable
+as String,archivo: freezed == archivo ? _self.archivo : archivo // ignore: cast_nullable_to_non_nullable
+as File?,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }
@@ -180,10 +181,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  File? archivo,  bool isCargando)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CrearEvidenciaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.archivo,_that.isCargando);case _:
   return orElse();
 
 }
@@ -201,10 +202,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  bool isCargando)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  File? archivo,  bool isCargando)  $default,) {final _that = this;
 switch (_that) {
 case _CrearEvidenciaScreenState():
-return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.archivo,_that.isCargando);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -221,10 +222,10 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  bool isCargando)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( MensajeUI? mensajeUi,  MensajeUI? eventoUI,  int visitaId,  String eviTipo,  String eviObservaciones,  File? archivo,  bool isCargando)?  $default,) {final _that = this;
 switch (_that) {
 case _CrearEvidenciaScreenState() when $default != null:
-return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.isCargando);case _:
+return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.archivo,_that.isCargando);case _:
   return null;
 
 }
@@ -236,7 +237,7 @@ return $default(_that.mensajeUi,_that.eventoUI,_that.visitaId,_that.eviTipo,_tha
 
 
 class _CrearEvidenciaScreenState extends CrearEvidenciaScreenState {
-  const _CrearEvidenciaScreenState({this.mensajeUi, this.eventoUI, this.visitaId = 0, this.eviTipo = "", this.eviObservaciones = "", this.isCargando = false}): super._();
+  const _CrearEvidenciaScreenState({this.mensajeUi, this.eventoUI, this.visitaId = 0, this.eviTipo = "", this.eviObservaciones = "", this.archivo, this.isCargando = false}): super._();
   
 
 @override final  MensajeUI? mensajeUi;
@@ -245,6 +246,7 @@ class _CrearEvidenciaScreenState extends CrearEvidenciaScreenState {
 @override@JsonKey() final  int visitaId;
 @override@JsonKey() final  String eviTipo;
 @override@JsonKey() final  String eviObservaciones;
+@override final  File? archivo;
 @override@JsonKey() final  bool isCargando;
 
 /// Create a copy of CrearEvidenciaScreenState
@@ -257,16 +259,16 @@ _$CrearEvidenciaScreenStateCopyWith<_CrearEvidenciaScreenState> get copyWith => 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearEvidenciaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CrearEvidenciaScreenState&&(identical(other.mensajeUi, mensajeUi) || other.mensajeUi == mensajeUi)&&(identical(other.eventoUI, eventoUI) || other.eventoUI == eventoUI)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.archivo, archivo) || other.archivo == archivo)&&(identical(other.isCargando, isCargando) || other.isCargando == isCargando));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visitaId,eviTipo,eviObservaciones,isCargando);
+int get hashCode => Object.hash(runtimeType,mensajeUi,eventoUI,visitaId,eviTipo,eviObservaciones,archivo,isCargando);
 
 @override
 String toString() {
-  return 'CrearEvidenciaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, isCargando: $isCargando)';
+  return 'CrearEvidenciaScreenState(mensajeUi: $mensajeUi, eventoUI: $eventoUI, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, archivo: $archivo, isCargando: $isCargando)';
 }
 
 
@@ -277,7 +279,7 @@ abstract mixin class _$CrearEvidenciaScreenStateCopyWith<$Res> implements $Crear
   factory _$CrearEvidenciaScreenStateCopyWith(_CrearEvidenciaScreenState value, $Res Function(_CrearEvidenciaScreenState) _then) = __$CrearEvidenciaScreenStateCopyWithImpl;
 @override @useResult
 $Res call({
- MensajeUI? mensajeUi, MensajeUI? eventoUI, int visitaId, String eviTipo, String eviObservaciones, bool isCargando
+ MensajeUI? mensajeUi, MensajeUI? eventoUI, int visitaId, String eviTipo, String eviObservaciones, File? archivo, bool isCargando
 });
 
 
@@ -294,14 +296,15 @@ class __$CrearEvidenciaScreenStateCopyWithImpl<$Res>
 
 /// Create a copy of CrearEvidenciaScreenState
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visitaId = null,Object? eviTipo = null,Object? eviObservaciones = null,Object? isCargando = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? mensajeUi = freezed,Object? eventoUI = freezed,Object? visitaId = null,Object? eviTipo = null,Object? eviObservaciones = null,Object? archivo = freezed,Object? isCargando = null,}) {
   return _then(_CrearEvidenciaScreenState(
 mensajeUi: freezed == mensajeUi ? _self.mensajeUi : mensajeUi // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,eventoUI: freezed == eventoUI ? _self.eventoUI : eventoUI // ignore: cast_nullable_to_non_nullable
 as MensajeUI?,visitaId: null == visitaId ? _self.visitaId : visitaId // ignore: cast_nullable_to_non_nullable
 as int,eviTipo: null == eviTipo ? _self.eviTipo : eviTipo // ignore: cast_nullable_to_non_nullable
 as String,eviObservaciones: null == eviObservaciones ? _self.eviObservaciones : eviObservaciones // ignore: cast_nullable_to_non_nullable
-as String,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable
+as String,archivo: freezed == archivo ? _self.archivo : archivo // ignore: cast_nullable_to_non_nullable
+as File?,isCargando: null == isCargando ? _self.isCargando : isCargando // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

@@ -8,7 +8,7 @@ class TblRuta extends Table {
   IntColumn get supId => integer()();
   TextColumn get rutNombre => text()();
   TextColumn get rutComentario => text()();
-  TextColumn get rutFechaEjecucion => text()();
+  DateTimeColumn get rutFechaEjecucion => dateTime()();
   TextColumn get nombreVendedor => text().nullable()();
   TextColumn get nombreSupervisor => text().nullable()();
 

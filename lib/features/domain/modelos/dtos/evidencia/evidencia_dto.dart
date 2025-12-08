@@ -12,7 +12,8 @@ abstract class EvidenciaDto with _$EvidenciaDto {
     required DateTime eviFechaCreacion,
     required int visitaId,
     required String? eviTipo,
-    required String? eviObservaciones
+    required String? eviObservaciones,
+    required String? eviArchivoUrl,
   }) = _EvidenciaDto;
   factory EvidenciaDto.fromJson(Map<String, Object?> json) => _$EvidenciaDtoFromJson(json);
 }

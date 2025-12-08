@@ -7,6 +7,8 @@ class TblEvidencia extends Table {
   IntColumn get visitaId => integer()();
   TextColumn get eviTipo => text().nullable()();
   TextColumn get eviObservaciones => text().nullable()();
+  TextColumn get eviArchivoUrl => text().nullable()();
+  DateTimeColumn get eviFechaCreacion => dateTime()(); 
 
   @override
   Set<Column> get primaryKey => {eviId};

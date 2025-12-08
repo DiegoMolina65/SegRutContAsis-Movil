@@ -10,6 +10,7 @@ abstract class Evidencia with _$Evidencia {
     required int visitaId,
     required String? eviTipo,
     required String? eviObservaciones,
+    required String? eviArchivoUrl,
     @JsonKey(ignore: true) DateTime? eviFechaCreacion,
   }) = _Evidencia;
 
@@ -20,6 +21,7 @@ abstract class Evidencia with _$Evidencia {
     required String? eviTipo,
     required String? eviObservaciones,
     required DateTime? eviFechaCreacion,
+    required String? eviArchivoUrl,
   }) {
     return Evidencia(
       eviId: eviId,
@@ -27,6 +29,7 @@ abstract class Evidencia with _$Evidencia {
       eviTipo: eviTipo,
       eviObservaciones: eviObservaciones,
       eviFechaCreacion: DateTime.now(),
+      eviArchivoUrl: eviArchivoUrl,
     );
   }
 

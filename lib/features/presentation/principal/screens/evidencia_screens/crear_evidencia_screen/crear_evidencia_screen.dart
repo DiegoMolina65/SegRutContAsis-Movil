@@ -34,6 +34,7 @@ class CrearEvidenciaView extends ConsumerStatefulWidget {
 
 class _CrearEvidenciaViewState extends ConsumerState<CrearEvidenciaView> {
   final _formKey = GlobalKey<FormState>();
+  String? nombreArchivoSeleccionado;
 
   void _validarYCrearEvidencia() {
     if (_formKey.currentState!.validate()) {
@@ -42,6 +43,20 @@ class _CrearEvidenciaViewState extends ConsumerState<CrearEvidenciaView> {
       );
 
       notifier.onCrearEvidencia().ejecutarConLoading();
+    }
+  }
+
+  Future<void> _seleccionarArchivo() async {
+    final notifier = ref.read(
+      crearEvidenciaScreenProvider(widget.visitaId).notifier,
+    );
+
+    final resultado = await notifier.pickFile();
+
+    if (resultado != null) {
+      setState(() {
+        nombreArchivoSeleccionado = resultado;
+      });
     }
   }
 
@@ -62,6 +77,9 @@ class _CrearEvidenciaViewState extends ConsumerState<CrearEvidenciaView> {
         if (next != null) {
           DialogoMensajeUI(mensajeUI: next).show(context);
           _formKey.currentState?.reset();
+          setState(() {
+            nombreArchivoSeleccionado = null;
+          });
         }
       },
     );
@@ -75,7 +93,7 @@ class _CrearEvidenciaViewState extends ConsumerState<CrearEvidenciaView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              /// VISITA ID — SOLO LECTURA
+              /// VISITA ID
               const CustomText.etiqueta(
                 "Visita asociada:",
                 color: Colors.black,
@@ -131,9 +149,35 @@ class _CrearEvidenciaViewState extends ConsumerState<CrearEvidenciaView> {
                   return null;
                 },
               ),
+              const SizedBox(height: 24),
+
+              /// ARCHIVO
+              const CustomText.etiqueta(
+                "Archivo adjunto (opcional):",
+                color: Colors.black,
+              ),
+              const SizedBox(height: 8),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      nombreArchivoSeleccionado ??
+                          "Ningún archivo seleccionado",
+                      style: const TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                  const SizedBox(width: 12),
+                  ElevatedButton.icon(
+                    onPressed: _seleccionarArchivo,
+                    icon: const Icon(Icons.attach_file),
+                    label: const Text("Seleccionar"),
+                  ),
+                ],
+              ),
+
               const SizedBox(height: 32),
 
-              /// ===========================
               /// BOTÓN REGISTRAR
               CustomElevatedButton(
                 etiqueta: "Registrar Evidencia",

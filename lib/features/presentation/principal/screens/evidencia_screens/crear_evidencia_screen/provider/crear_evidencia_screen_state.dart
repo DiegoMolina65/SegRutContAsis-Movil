@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:med_geo_asistencia/features/presentation/core/mensajes_ui/dialogo/mensaje_ui.dart';
 
@@ -15,6 +17,7 @@ abstract class CrearEvidenciaScreenState with _$CrearEvidenciaScreenState {
     @Default(0) int visitaId,
     @Default("") String eviTipo,
     @Default("") String eviObservaciones,
+    final File? archivo,
 
     @Default(false) bool isCargando,
   }) = _CrearEvidenciaScreenState;

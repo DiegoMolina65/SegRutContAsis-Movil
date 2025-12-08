@@ -13,6 +13,7 @@ _EvidenciaDto _$EvidenciaDtoFromJson(Map<String, dynamic> json) =>
       visitaId: (json['visitaId'] as num).toInt(),
       eviTipo: json['eviTipo'] as String?,
       eviObservaciones: json['eviObservaciones'] as String?,
+      eviArchivoUrl: json['eviArchivoUrl'] as String?,
     );
 
 Map<String, dynamic> _$EvidenciaDtoToJson(_EvidenciaDto instance) =>
@@ -22,4 +23,5 @@ Map<String, dynamic> _$EvidenciaDtoToJson(_EvidenciaDto instance) =>
       'visitaId': instance.visitaId,
       'eviTipo': instance.eviTipo,
       'eviObservaciones': instance.eviObservaciones,
+      'eviArchivoUrl': instance.eviArchivoUrl,
     };

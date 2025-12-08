@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$EvidenciaDto {
 
- int get eviId; DateTime get eviFechaCreacion; int get visitaId; String? get eviTipo; String? get eviObservaciones;
+ int get eviId; DateTime get eviFechaCreacion; int get visitaId; String? get eviTipo; String? get eviObservaciones; String? get eviArchivoUrl;
 /// Create a copy of EvidenciaDto
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $EvidenciaDtoCopyWith<EvidenciaDto> get copyWith => _$EvidenciaDtoCopyWithImpl<E
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is EvidenciaDto&&(identical(other.eviId, eviId) || other.eviId == eviId)&&(identical(other.eviFechaCreacion, eviFechaCreacion) || other.eviFechaCreacion == eviFechaCreacion)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is EvidenciaDto&&(identical(other.eviId, eviId) || other.eviId == eviId)&&(identical(other.eviFechaCreacion, eviFechaCreacion) || other.eviFechaCreacion == eviFechaCreacion)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.eviArchivoUrl, eviArchivoUrl) || other.eviArchivoUrl == eviArchivoUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,eviId,eviFechaCreacion,visitaId,eviTipo,eviObservaciones);
+int get hashCode => Object.hash(runtimeType,eviId,eviFechaCreacion,visitaId,eviTipo,eviObservaciones,eviArchivoUrl);
 
 @override
 String toString() {
-  return 'EvidenciaDto(eviId: $eviId, eviFechaCreacion: $eviFechaCreacion, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones)';
+  return 'EvidenciaDto(eviId: $eviId, eviFechaCreacion: $eviFechaCreacion, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, eviArchivoUrl: $eviArchivoUrl)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $EvidenciaDtoCopyWith<$Res>  {
   factory $EvidenciaDtoCopyWith(EvidenciaDto value, $Res Function(EvidenciaDto) _then) = _$EvidenciaDtoCopyWithImpl;
 @useResult
 $Res call({
- int eviId, DateTime eviFechaCreacion, int visitaId, String? eviTipo, String? eviObservaciones
+ int eviId, DateTime eviFechaCreacion, int visitaId, String? eviTipo, String? eviObservaciones, String? eviArchivoUrl
 });
 
 
@@ -65,13 +65,14 @@ class _$EvidenciaDtoCopyWithImpl<$Res>
 
 /// Create a copy of EvidenciaDto
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? eviId = null,Object? eviFechaCreacion = null,Object? visitaId = null,Object? eviTipo = freezed,Object? eviObservaciones = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? eviId = null,Object? eviFechaCreacion = null,Object? visitaId = null,Object? eviTipo = freezed,Object? eviObservaciones = freezed,Object? eviArchivoUrl = freezed,}) {
   return _then(_self.copyWith(
 eviId: null == eviId ? _self.eviId : eviId // ignore: cast_nullable_to_non_nullable
 as int,eviFechaCreacion: null == eviFechaCreacion ? _self.eviFechaCreacion : eviFechaCreacion // ignore: cast_nullable_to_non_nullable
 as DateTime,visitaId: null == visitaId ? _self.visitaId : visitaId // ignore: cast_nullable_to_non_nullable
 as int,eviTipo: freezed == eviTipo ? _self.eviTipo : eviTipo // ignore: cast_nullable_to_non_nullable
 as String?,eviObservaciones: freezed == eviObservaciones ? _self.eviObservaciones : eviObservaciones // ignore: cast_nullable_to_non_nullable
+as String?,eviArchivoUrl: freezed == eviArchivoUrl ? _self.eviArchivoUrl : eviArchivoUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -157,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones,  String? eviArchivoUrl)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _EvidenciaDto() when $default != null:
-return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones);case _:
+return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.eviArchivoUrl);case _:
   return orElse();
 
 }
@@ -178,10 +179,10 @@ return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones,  String? eviArchivoUrl)  $default,) {final _that = this;
 switch (_that) {
 case _EvidenciaDto():
-return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones);case _:
+return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.eviArchivoUrl);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +199,10 @@ return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int eviId,  DateTime eviFechaCreacion,  int visitaId,  String? eviTipo,  String? eviObservaciones,  String? eviArchivoUrl)?  $default,) {final _that = this;
 switch (_that) {
 case _EvidenciaDto() when $default != null:
-return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones);case _:
+return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,_that.eviObservaciones,_that.eviArchivoUrl);case _:
   return null;
 
 }
@@ -213,7 +214,7 @@ return $default(_that.eviId,_that.eviFechaCreacion,_that.visitaId,_that.eviTipo,
 @JsonSerializable()
 
 class _EvidenciaDto implements EvidenciaDto {
-  const _EvidenciaDto({required this.eviId, required this.eviFechaCreacion, required this.visitaId, required this.eviTipo, required this.eviObservaciones});
+  const _EvidenciaDto({required this.eviId, required this.eviFechaCreacion, required this.visitaId, required this.eviTipo, required this.eviObservaciones, required this.eviArchivoUrl});
   factory _EvidenciaDto.fromJson(Map<String, dynamic> json) => _$EvidenciaDtoFromJson(json);
 
 @override final  int eviId;
@@ -221,6 +222,7 @@ class _EvidenciaDto implements EvidenciaDto {
 @override final  int visitaId;
 @override final  String? eviTipo;
 @override final  String? eviObservaciones;
+@override final  String? eviArchivoUrl;
 
 /// Create a copy of EvidenciaDto
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +237,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EvidenciaDto&&(identical(other.eviId, eviId) || other.eviId == eviId)&&(identical(other.eviFechaCreacion, eviFechaCreacion) || other.eviFechaCreacion == eviFechaCreacion)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _EvidenciaDto&&(identical(other.eviId, eviId) || other.eviId == eviId)&&(identical(other.eviFechaCreacion, eviFechaCreacion) || other.eviFechaCreacion == eviFechaCreacion)&&(identical(other.visitaId, visitaId) || other.visitaId == visitaId)&&(identical(other.eviTipo, eviTipo) || other.eviTipo == eviTipo)&&(identical(other.eviObservaciones, eviObservaciones) || other.eviObservaciones == eviObservaciones)&&(identical(other.eviArchivoUrl, eviArchivoUrl) || other.eviArchivoUrl == eviArchivoUrl));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,eviId,eviFechaCreacion,visitaId,eviTipo,eviObservaciones);
+int get hashCode => Object.hash(runtimeType,eviId,eviFechaCreacion,visitaId,eviTipo,eviObservaciones,eviArchivoUrl);
 
 @override
 String toString() {
-  return 'EvidenciaDto(eviId: $eviId, eviFechaCreacion: $eviFechaCreacion, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones)';
+  return 'EvidenciaDto(eviId: $eviId, eviFechaCreacion: $eviFechaCreacion, visitaId: $visitaId, eviTipo: $eviTipo, eviObservaciones: $eviObservaciones, eviArchivoUrl: $eviArchivoUrl)';
 }
 
 
@@ -255,7 +257,7 @@ abstract mixin class _$EvidenciaDtoCopyWith<$Res> implements $EvidenciaDtoCopyWi
   factory _$EvidenciaDtoCopyWith(_EvidenciaDto value, $Res Function(_EvidenciaDto) _then) = __$EvidenciaDtoCopyWithImpl;
 @override @useResult
 $Res call({
- int eviId, DateTime eviFechaCreacion, int visitaId, String? eviTipo, String? eviObservaciones
+ int eviId, DateTime eviFechaCreacion, int visitaId, String? eviTipo, String? eviObservaciones, String? eviArchivoUrl
 });
 
 
@@ -272,13 +274,14 @@ class __$EvidenciaDtoCopyWithImpl<$Res>
 
 /// Create a copy of EvidenciaDto
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? eviId = null,Object? eviFechaCreacion = null,Object? visitaId = null,Object? eviTipo = freezed,Object? eviObservaciones = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? eviId = null,Object? eviFechaCreacion = null,Object? visitaId = null,Object? eviTipo = freezed,Object? eviObservaciones = freezed,Object? eviArchivoUrl = freezed,}) {
   return _then(_EvidenciaDto(
 eviId: null == eviId ? _self.eviId : eviId // ignore: cast_nullable_to_non_nullable
 as int,eviFechaCreacion: null == eviFechaCreacion ? _self.eviFechaCreacion : eviFechaCreacion // ignore: cast_nullable_to_non_nullable
 as DateTime,visitaId: null == visitaId ? _self.visitaId : visitaId // ignore: cast_nullable_to_non_nullable
 as int,eviTipo: freezed == eviTipo ? _self.eviTipo : eviTipo // ignore: cast_nullable_to_non_nullable
 as String?,eviObservaciones: freezed == eviObservaciones ? _self.eviObservaciones : eviObservaciones // ignore: cast_nullable_to_non_nullable
+as String?,eviArchivoUrl: freezed == eviArchivoUrl ? _self.eviArchivoUrl : eviArchivoUrl // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

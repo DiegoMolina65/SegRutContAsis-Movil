@@ -6,19 +6,20 @@ class TblVisita extends Table {
   IntColumn get visId => integer()();
   IntColumn get rutId => integer()();
   IntColumn get dirClId => integer()();
-  TextColumn get visComentario => text()();
+  TextColumn get visComentario => text()(); 
 
-  TextColumn get nombreCliente => text().nullable()();
-  TextColumn get nombreSucursalCliente => text().nullable()();
-  BoolColumn get visEstadoDel => boolean().nullable()();
-  RealColumn get sucursalLatitud => real().nullable()();
-  RealColumn get sucursalLongitud => real().nullable()();
-  TextColumn get nombreZona => text().nullable()();
-  TextColumn get direccion => text().nullable()();
-  TextColumn get nombreVendedor => text().nullable()();
-  TextColumn get nombreRuta => text().nullable()();
-  TextColumn get fechaEjecucionRuta => text().nullable()();
-  TextColumn get visFechaCreacion => text().nullable()();
+  TextColumn get nombreCliente => text()(); 
+  TextColumn get nombreSucursalCliente => text()(); 
+  BoolColumn get visEstadoDel => boolean()(); 
+  RealColumn get sucursalLatitud => real()();
+  RealColumn get sucursalLongitud => real()(); 
+  TextColumn get nombreZona => text()(); 
+  TextColumn get direccion => text()(); 
+  TextColumn get nombreVendedor => text()(); 
+  TextColumn get nombreRuta => text()(); 
+
+  DateTimeColumn get fechaEjecucionRuta => dateTime()();
+  DateTimeColumn get visFechaCreacion => dateTime()();
 
   @override
   Set<Column> get primaryKey => {visId};

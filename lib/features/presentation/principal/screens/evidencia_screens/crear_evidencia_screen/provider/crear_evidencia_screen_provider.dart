@@ -1,3 +1,5 @@
+import 'dart:io';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:med_geo_asistencia/features/domain/entities/export_entities.dart';
 import 'package:med_geo_asistencia/features/domain/repositories/evidencia_repository.dart';
@@ -50,11 +52,24 @@ class CrearEvidenciaScreenNotifier
     state = state.copyWith(eviObservaciones: valor);
   }
 
+  void onSeleccionarArchivo(File archivo) {
+    state = state.copyWith(archivo: archivo);
+  }
+
   void onResetearFormulario() {
     state = CrearEvidenciaScreenState(visitaId: initialVisitaId);
   }
 
-  /// Crear evidencia + auto marcar llegada con ubicación GPS
+  Future<String?> pickFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result != null && result.files.single.path != null) {
+      final file = File(result.files.single.path!);
+      onSeleccionarArchivo(file);
+      return result.files.single.name;
+    }
+    return null;
+  }
+
   Future<void> onCrearEvidencia() async {
     try {
       // VALIDACIONES
@@ -91,6 +106,7 @@ class CrearEvidenciaScreenNotifier
         eviTipo: state.eviTipo,
         eviObservaciones: state.eviObservaciones,
         eviFechaCreacion: DateTime.now(),
+        eviArchivoUrl: state.archivo?.path,
       );
 
       await evidenciaRepositorio.crearEvidencia(nuevoEvidencia);

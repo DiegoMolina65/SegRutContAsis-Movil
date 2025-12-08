@@ -9,6 +9,7 @@ class EvidenciaMapper {
     visitaId: dto.visitaId,
     eviTipo: dto.eviTipo,
     eviObservaciones: dto.eviObservaciones,
+    eviArchivoUrl: dto.eviArchivoUrl,
   );
 
   // Entidad > DTO
@@ -18,5 +19,6 @@ class EvidenciaMapper {
     visitaId: entity.visitaId,
     eviTipo: entity.eviTipo,
     eviObservaciones: entity.eviObservaciones,
+    eviArchivoUrl: entity.eviArchivoUrl,
   );
 }

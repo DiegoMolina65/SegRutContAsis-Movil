@@ -8,7 +8,7 @@ class TblSeguimientovendedor extends Table {
   RealColumn get segLatitud => real()();
   RealColumn get segLongitud => real()();
   TextColumn get vendedorNombre => text().nullable()();
-  TextColumn get segFechaCreacion => text().nullable()();
+  DateTimeColumn get segFechaCreacion => dateTime()();
 
   @override
   Set<Column> get primaryKey => {segId};
