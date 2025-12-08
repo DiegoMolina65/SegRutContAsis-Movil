@@ -13,6 +13,8 @@ import 'package:med_geo_asistencia/features/infraestructure/contratos/seguimient
 import 'package:med_geo_asistencia/features/presentation/core/componentes/config_puglins/config_rastreo_gps.dart';
 import 'package:overlay_kit/overlay_kit.dart';
 
+import 'segundo_plano/inicializadores/workmanager_inicializador.dart';
+
 @pragma('vm:entry-point')
 void headlessTask(bg.HeadlessEvent headlessEvent) async {
   print('[BackgroundGeolocation HeadlessTask]: $headlessEvent');
@@ -90,6 +92,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initializeDateFormatting('es', null);
 
+  await WorkManagerInicializador.init();
   runApp(ProviderScope(child: const MainApp()));
 
   // Register your headlessTask:
